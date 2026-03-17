@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safaris and Tours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#2f2418',
+              accent: '#c78642',
+              background: '#f5ecdc',
+              muted: '#6b665d',
+              forest: '#425c43',
+              sand: '#f3e3c8'
+            },
+            fontFamily: {
+              'sans': ['Montserrat', 'sans-serif']
+            },
+            boxShadow: {
+              safari: '0 25px 60px rgba(63, 40, 23, 0.15)'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(215, 181, 127, 0.28), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(85, 116, 75, 0.14), transparent 24%),
+                linear-gradient(180deg, #f8f3ea 0%, #f5ecdc 50%, #ede0ca 100%);
+        }
+
+        .hero-panel {
+            background:
+                linear-gradient(rgba(30, 20, 13, 0.52), rgba(30, 20, 13, 0.62)),
+                url('assets/images/safari-background.avif') center/cover no-repeat;
+        }
+
+        .glass-tile {
+            background: rgba(255, 249, 240, 0.14);
+            border: 1px solid rgba(255, 244, 224, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .tour-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 249, 241, 0.9));
+            border: 1px solid rgba(93, 49, 28, 0.1);
+        }
+
+        .tour-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto;
+            height: 5px;
+            background: linear-gradient(90deg, #8f552f 0%, #d3a15f 55%, #59714a 100%);
+        }
+
+        .tour-card:hover .tour-image {
+            transform: scale(1.06);
+        }
+
+        .tour-image {
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-gray-800">
+    <div id="header"></div>
+    
+    <main class="px-4 py-8 md:px-6 md:py-10">
+        <div class="mx-auto flex max-w-7xl flex-col gap-10">
+            <section class="hero-panel relative overflow-hidden rounded-[2rem] px-6 py-14 text-white shadow-safari md:px-10 md:py-20">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_18%),linear-gradient(135deg,rgba(201,162,39,0.15),transparent_38%)]"></div>
+                <div class="relative z-10 mx-auto flex max-w-5xl flex-col gap-8">
+                    <div class="glass-tile w-fit rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-sand">Wild Journeys</div>
+                    <div class="max-w-3xl">
+                        <h1 class="mb-5 text-4xl font-extrabold leading-tight text-[#fff8ed] md:text-6xl">Safaris and Tours</h1>
+                        <p class="max-w-2xl text-base leading-7 text-[#f8efdf] md:text-lg">Step into curated wildlife encounters, cultural discoveries, and lodge experiences designed to turn East and Southern Africa into one unforgettable travel story.</p>
+                    </div>
+                    <div class="grid gap-4 md:grid-cols-3">
+                        <div class="glass-tile rounded-3xl px-5 py-4">
+                            <div class="text-2xl font-extrabold">6</div>
+                            <div class="text-sm uppercase tracking-[0.12em] text-[#f1e4cf]">Tour Collections</div>
+                        </div>
+                        <div class="glass-tile rounded-3xl px-5 py-4">
+                            <div class="text-2xl font-extrabold">Big Five</div>
+                            <div class="text-sm uppercase tracking-[0.12em] text-[#f1e4cf]">Signature Encounters</div>
+                        </div>
+                        <div class="glass-tile rounded-3xl px-5 py-4">
+                            <div class="text-2xl font-extrabold">Year Round</div>
+                            <div class="text-sm uppercase tracking-[0.12em] text-[#f1e4cf]">Travel Windows</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid gap-5 md:grid-cols-3">
+                <article class="rounded-[1.75rem] border border-[#d7c4a8] bg-[rgba(255,252,247,0.85)] p-6 shadow-safari">
+                    <p class="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Game Drives</p>
+                    <h2 class="mb-3 text-2xl font-bold text-primary">Close wildlife viewing</h2>
+                    <p class="text-sm leading-7 text-muted">Track iconic species across open plains, riverbanks, and acacia landscapes with guided drives built around light, movement, and timing.</p>
+                </article>
+                <article class="rounded-[1.75rem] border border-[#d7c4a8] bg-[rgba(255,252,247,0.85)] p-6 shadow-safari">
+                    <p class="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Culture</p>
+                    <h2 class="mb-3 text-2xl font-bold text-primary">Stories beyond the parks</h2>
+                    <p class="text-sm leading-7 text-muted">Blend wildlife with community visits, regional cuisine, and heritage experiences that give each itinerary more depth than a standard tour loop.</p>
+                </article>
+                <article class="rounded-[1.75rem] border border-[#d7c4a8] bg-[rgba(255,252,247,0.85)] p-6 shadow-safari">
+                    <p class="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Stay</p>
+                    <h2 class="mb-3 text-2xl font-bold text-primary">Lodges with atmosphere</h2>
+                    <p class="text-sm leading-7 text-muted">Choose from tented camps, boutique stays, and scenic lodge settings that keep the landscape central to the experience.</p>
+                </article>
+            </section>
+
+            <section class="rounded-[2rem] bg-[rgba(255,250,243,0.7)] px-4 py-8 shadow-safari md:px-8 md:py-10">
+                <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <p class="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Outlook</p>
+                        <h2 class="text-3xl font-bold text-primary md:text-4xl">Safari Experiences in Focus</h2>
+                    </div>
+                    <p class="max-w-2xl text-sm leading-7 text-muted">Each card highlights a different part of the travel experience, from classic game-viewing to culture, adventure, guiding, and hospitality.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <!-- Image 1 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image1.png" alt="Big Game" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Classic Safari</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Big Game Safari</h3>
+                            <p class="text-sm leading-7 text-muted">Spot powerful wildlife across open reserves and golden plains, with routes designed for unforgettable sightings and wide cinematic views.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Image 2 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image2.png" alt="Adventure Journey" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Adventure</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Adventure Activities</h3>
+                            <p class="text-sm leading-7 text-muted">Add energy to the itinerary with trail experiences, active exploration, and outdoor moments that go beyond the vehicle window.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Image 3 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image3.png" alt="Wildlife Safaris" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Conservation</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Wildlife Safaris</h3>
+                            <p class="text-sm leading-7 text-muted">Experience biodiversity up close while highlighting the ecosystems, species protection, and stewardship that sustain the wild landscapes.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Image 4 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image4.png" alt="Cultural Tours" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Heritage</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Cultural Tours</h3>
+                            <p class="text-sm leading-7 text-muted">Discover regional traditions, local rhythms, and community encounters that bring texture and meaning to every stop on the route.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Image 5 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image5.png" alt="Tour Guides" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Guiding</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Tour Guides and Interpretation</h3>
+                            <p class="text-sm leading-7 text-muted">Rely on knowledgeable guides who connect landscapes, wildlife behavior, and local context into a richer travel narrative.</p>
+                        </div>
+                    </article>
+                    
+                    <!-- Image 6 -->
+                    <article class="tour-card group relative overflow-hidden rounded-[1.75rem] shadow-safari transition duration-300 hover:-translate-y-2">
+                        <div class="overflow-hidden">
+                            <img src="assets/images/photo essay/image6.png" alt="Accommodation Services" class="tour-image h-56 w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 inline-flex rounded-full bg-sand px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-accent">Stay & Rest</div>
+                            <h3 class="mb-2 text-xl font-bold text-primary">Accommodation Services</h3>
+                            <p class="text-sm leading-7 text-muted">Unwind in lodges and camps that pair comfort with atmosphere, keeping guests close to the character of the landscape.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <div id="footer"></div>
+    
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+</body>
+</html>

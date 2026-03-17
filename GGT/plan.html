@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Travel Plan & Budget</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f4f4;
+margin:0;
+padding:0;
+}
+
+.container{
+width:60%;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:40px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+}
+
+input, select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#28a745;
+color:white;
+border:none;
+border-radius:4px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#218838;
+}
+
+.section{
+margin-top:20px;
+}
+
+.canvas{
+padding:16px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.traveler-canvas{
+background:#f3f8ff;
+border:1px solid #cfe0ff;
+}
+
+.budget-canvas{
+background:#f4fff7;
+border:1px solid #c9ebd5;
+}
+
+.traveler-grid{
+display:grid;
+grid-template-columns:repeat(2, minmax(0, 1fr));
+gap:12px 16px;
+}
+
+.budget-grid{
+display:grid;
+grid-template-columns:repeat(3, minmax(0, 1fr));
+gap:12px 16px;
+}
+
+.traveler-grid .full-width,
+.budget-grid .full-width{
+grid-column:1 / -1;
+}
+
+.field label{
+display:block;
+margin-bottom:4px;
+}
+
+.field input,
+.field select{
+margin:0;
+}
+
+@media (max-width:700px){
+.traveler-grid,
+.budget-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Travel Plan & Budget</h2>
+
+<form action="/save-plan" method="POST">
+
+<div class="section">
+<h3>Traveler Details</h3>
+
+<div class="canvas traveler-canvas">
+<div class="traveler-grid">
+<div class="field full-width">
+<label>Full Name</label>
+<input type="text" name="full_name" placeholder="Enter your full name" required>
+</div>
+
+<div class="field">
+<label>ID / Passport Number</label>
+<input type="text" name="id_passport" placeholder="Enter ID or passport number">
+</div>
+
+<div class="field">
+<label>Phone Number</label>
+<input type="text" name="phone" placeholder="Enter phone number">
+</div>
+
+<div class="field full-width">
+<label>Email</label>
+<input type="email" name="email" placeholder="Enter email">
+</div>
+
+<div class="field full-width">
+<label>Destination</label>
+<input type="text" name="destination" placeholder="Where are you traveling to?">
+</div>
+
+<div class="field">
+<label>Travel Date</label>
+<input type="date" name="travel_date">
+</div>
+
+<div class="field">
+<label>Return Date</label>
+<input type="date" name="return_date">
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="section">
+<h3>Estimated Travel Budget</h3>
+
+<div class="canvas budget-canvas">
+<div class="budget-grid">
+<div class="field">
+<label>Transport Cost</label>
+<input type="number" name="transport_cost" placeholder="Transport cost" min="0">
+</div>
+
+<div class="field">
+<label>Accommodation Cost</label>
+<input type="number" name="accommodation_cost" placeholder="Accommodation cost" min="0">
+</div>
+
+<div class="field">
+<label>Food Cost</label>
+<input type="number" name="food_cost" placeholder="Food cost" min="0">
+</div>
+
+<div class="field">
+<label>Activities Cost</label>
+<input type="number" name="activities_cost" placeholder="Activities cost" min="0">
+</div>
+
+<div class="field full-width">
+<label>Emergency Money</label>
+<input type="number" name="emergency_money" placeholder="Emergency funds" min="0">
+</div>
+</div>
+</div>
+
+</div>
+
+<button type="submit">Submit Travel Plan</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

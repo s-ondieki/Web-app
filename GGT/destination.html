@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Safari Destinations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --page-bg: #f4ecdd;
+            --surface: rgba(255, 252, 246, 0.9);
+            --surface-strong: #fffdf8;
+            --surface-soft: #efe0c5;
+            --text-main: #1f2b21;
+            --text-soft: #5c665d;
+            --accent: #8f552f;
+            --accent-deep: #5d311c;
+            --accent-gold: #d8a35d;
+            --border: rgba(93, 49, 28, 0.12);
+            --shadow: 0 24px 55px rgba(67, 43, 24, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', 'Gill Sans', 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(215, 181, 127, 0.35), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(104, 133, 86, 0.16), transparent 26%),
+                linear-gradient(180deg, #f8f3ea 0%, var(--page-bg) 46%, #ece0cd 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 34px 20px 80px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 48px;
+            background:
+                linear-gradient(rgba(28, 20, 14, 0.5), rgba(28, 20, 14, 0.58)),
+                url('assets/images/safari-background.avif') center/cover no-repeat;
+            border-radius: 34px;
+            padding: clamp(42px, 7vw, 84px) 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(49, 31, 18, 0.16);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 18%),
+                linear-gradient(135deg, rgba(216, 163, 93, 0.15), transparent 40%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 247, 235, 0.14);
+            border: 1px solid rgba(255, 244, 224, 0.2);
+            color: #fff4de;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            margin-bottom: 14px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #fff9ef;
+            text-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.18rem);
+            color: rgba(255, 247, 235, 0.88);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .stat-pill {
+            min-width: 160px;
+            padding: 14px 18px;
+            border-radius: 20px;
+            background: rgba(255, 251, 244, 0.14);
+            border: 1px solid rgba(255, 245, 230, 0.18);
+            backdrop-filter: blur(8px);
+            color: #fffaf2;
+        }
+
+        .stat-pill strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .stat-pill span {
+            font-size: 0.88rem;
+            color: rgba(255, 247, 235, 0.82);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 26px;
+        }
+
+        .country-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 249, 240, 0.88));
+            border-radius: 28px;
+            padding: 26px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .country-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-gold) 55%, #6d8a58 100%);
+        }
+
+        .country-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 70px rgba(67, 43, 24, 0.17);
+            border-color: rgba(93, 49, 28, 0.22);
+        }
+
+        .country-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(93, 49, 28, 0.1);
+        }
+
+        .country-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .country-flag {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: var(--surface-soft);
+            box-shadow: inset 0 0 0 1px rgba(93, 49, 28, 0.08);
+        }
+
+        .country-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--accent-deep);
+            line-height: 1.1;
+        }
+
+        .country-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(216, 163, 93, 0.16);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .attractions-title {
+            font-size: 0.86rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 14px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .attractions-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .attractions-list li {
+            padding: 10px 12px;
+            color: var(--text-soft);
+            font-size: 0.97rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(93, 49, 28, 0.06);
+        }
+
+        .attractions-list li:before {
+            content: "✦";
+            flex-shrink: 0;
+            color: var(--accent-gold);
+            margin-top: 1px;
+        }
+
+        .country-card:nth-child(3n + 1) .country-flag {
+            background: rgba(225, 199, 161, 0.78);
+        }
+
+        .country-card:nth-child(3n + 2) .country-flag {
+            background: rgba(198, 214, 189, 0.78);
+        }
+
+        .country-card:nth-child(3n) .country-flag {
+            background: rgba(237, 213, 181, 0.82);
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 26px 16px 72px;
+            }
+
+            .header {
+                border-radius: 26px;
+            }
+
+            .stat-pill {
+                min-width: 140px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 36px 18px;
+                margin-bottom: 34px;
+            }
+
+            .country-card {
+                border-radius: 22px;
+                padding: 22px;
+            }
+
+            .country-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .country-badge {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="eyebrow">Safari Collection</div>
+                <h1>Discover Africa</h1>
+                <p>Explore standout parks, coastlines, mountains, and wildlife experiences across some of Africa's most memorable travel destinations.</p>
+                <div class="header-stats">
+                    <div class="stat-pill">
+                        <strong>9</strong>
+                        <span>Destinations</span>
+                    </div>
+                    <div class="stat-pill">
+                        <strong>45</strong>
+                        <span>Top Attractions</span>
+                    </div>
+                    <div class="stat-pill">
+                        <strong>1</strong>
+                        <span>Epic Journey</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <!-- Kenya -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇰🇪</span>
+                        <h2 class="country-name">Kenya</h2>
+                    </div>
+                    <span class="country-badge">Big Five</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Maasai Mara National Reserve</li>
+                    <li>Amboseli National Park</li>
+                    <li>Lake Nakuru & Flamingos</li>
+                    <li>Diani Beach</li>
+                    <li>Tsavo National Parks</li>
+                </ul>
+            </article>
+
+            <!-- Rwanda -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇷🇼</span>
+                        <h2 class="country-name">Rwanda</h2>
+                    </div>
+                    <span class="country-badge">Gorilla Trek</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Volcanoes National Park</li>
+                    <li>Mountain Gorilla Trekking</li>
+                    <li>Kigali Genocide Memorial</li>
+                    <li>Lake Kivu</li>
+                    <li>Nyungwe Forest National Park</li>
+                </ul>
+            </article>
+
+            <!-- Tanzania -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇹🇿</span>
+                        <h2 class="country-name">Tanzania</h2>
+                    </div>
+                    <span class="country-badge">Migration</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Serengeti National Park</li>
+                    <li>Mount Kilimanjaro</li>
+                    <li>Ngorongoro Crater</li>
+                    <li>Zanzibar Island</li>
+                    <li>Tarangire National Park</li>
+                </ul>
+            </article>
+
+            <!-- Uganda -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇺🇬</span>
+                        <h2 class="country-name">Uganda</h2>
+                    </div>
+                    <span class="country-badge">Primates</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Bwindi Impenetrable Forest</li>
+                    <li>Queen Elizabeth National Park</li>
+                    <li>Murchison Falls</li>
+                    <li>Lake Victoria</li>
+                    <li>Kibale Forest (Chimpanzees)</li>
+                </ul>
+            </article>
+
+            <!-- Ethiopia -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇪🇹</span>
+                        <h2 class="country-name">Ethiopia</h2>
+                    </div>
+                    <span class="country-badge">Heritage</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Simien Mountains National Park</li>
+                    <li>Rock-Hewn Churches of Lalibela</li>
+                    <li>Danakil Depression</li>
+                    <li>Omo Valley Tribes</li>
+                    <li>Blue Nile Falls</li>
+                </ul>
+            </article>
+
+            <!-- Burundi -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇧🇮</span>
+                        <h2 class="country-name">Burundi</h2>
+                    </div>
+                    <span class="country-badge">Lake Escape</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Lake Tanganyika</li>
+                    <li>Rusizi National Park</li>
+                    <li>Kibira National Park</li>
+                    <li>Livingstone-Stanley Monument</li>
+                    <li>Gishora Drum Sanctuary</li>
+                </ul>
+            </article>
+
+            <!-- South Africa -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇿🇦</span>
+                        <h2 class="country-name">South Africa</h2>
+                    </div>
+                    <span class="country-badge">Iconic Views</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Kruger National Park</li>
+                    <li>Table Mountain</li>
+                    <li>Garden Route</li>
+                    <li>Cape of Good Hope</li>
+                    <li>Blyde River Canyon</li>
+                </ul>
+            </article>
+
+            <!-- Botswana -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇧🇼</span>
+                        <h2 class="country-name">Botswana</h2>
+                    </div>
+                    <span class="country-badge">Delta Safari</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Okavango Delta</li>
+                    <li>Chobe National Park</li>
+                    <li>Makgadikgadi Salt Pans</li>
+                    <li>Moremi Game Reserve</li>
+                    <li>Kalahari Desert</li>
+                </ul>
+            </article>
+
+            <!-- Namibia -->
+            <article class="country-card">
+                <div class="country-header">
+                    <div class="country-title">
+                        <span class="country-flag">🇳🇦</span>
+                        <h2 class="country-name">Namibia</h2>
+                    </div>
+                    <span class="country-badge">Desert Drama</span>
+                </div>
+                <div class="attractions-title">Best Attractions:</div>
+                <ul class="attractions-list">
+                    <li>Sossusvlei Sand Dunes</li>
+                    <li>Etosha National Park</li>
+                    <li>Skeleton Coast</li>
+                    <li>Fish River Canyon</li>
+                    <li>Spitzkoppe Mountains</li>
+                </ul>
+            </article>
+        </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Include header and footer components -->
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+</body>
+</html>

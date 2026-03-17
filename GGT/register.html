@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Safaris</title>
+    <style>
+        :root {
+            --surface: rgba(255, 251, 244, 0.92);
+            --text-main: #1f2a20;
+            --text-soft: #5f685f;
+            --accent: #a5623b;
+            --accent-deep: #6f3a24;
+            --gold: #d5a260;
+            --forest: #4d674f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background:
+                linear-gradient(rgba(23, 15, 10, 0.52), rgba(23, 15, 10, 0.62)),
+                url('assets/images/safari-background.avif') center/cover no-repeat;
+            font-family: 'Trebuchet MS', 'Gill Sans', 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            width: min(100%, 500px);
+            background: linear-gradient(180deg, var(--surface), rgba(255, 247, 235, 0.9));
+            padding: 34px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 237, 209, 0.26);
+            box-shadow: 0 30px 80px rgba(14, 9, 6, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            top: -75px;
+            right: -60px;
+            border-radius: 50%;
+            background: rgba(213, 162, 96, 0.17);
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            bottom: -60px;
+            left: -40px;
+            border-radius: 50%;
+            background: rgba(77, 103, 79, 0.14);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            color: var(--accent-deep);
+            font-size: clamp(1.9rem, 3vw, 2.35rem);
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            margin: 0 0 24px;
+            color: var(--text-soft);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 14px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: var(--accent);
+            background: rgba(213, 162, 96, 0.2);
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: -6px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(111, 58, 36, 0.16);
+            font-size: 0.98rem;
+            color: var(--text-main);
+            background: #fffdf9;
+            outline: none;
+            transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(213, 162, 96, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 6px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            box-shadow: 0 16px 30px rgba(165, 98, 59, 0.28);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px rgba(165, 98, 59, 0.34);
+            filter: brightness(1.03);
+        }
+
+        .link {
+            margin-top: 16px;
+            display: block;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: var(--accent-deep);
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 14px;
+            }
+
+            .container {
+                padding: 24px 20px;
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="content">
+        <div class="eyebrow">Travel Companion</div>
+        <h2>Create Account</h2>
+        <p class="subtitle">Join the platform to start planning routes, tracking costs, and organizing your next safari adventure.</p>
+
+        <form action="home.html">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" name="name" placeholder="Your full name" required>
+
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email" placeholder="you@gmail.com" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Create a password" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Re-enter your password" required>
+
+            <button type="submit" class="btn">Register</button>
+        </form>
+
+        <a href="login.html" class="link">Already have an account? Login</a>
+    </div>
+</div>
+
+</body>
+</html>
