@@ -1,0 +1,11 @@
+{
+  "name": "ggta-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Great Gorilla Tours App",
+  "scripts": {
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": ["safari", "tourism"],
+  "author": "",
+  "license": "ISC"
+}
