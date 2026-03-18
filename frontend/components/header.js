@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const linksHTML = navLinks
         .map(function (link) {
-            const isActive =
-                currentPath === link.href ||
-                (link.href === 'contact.html' && currentPath === 'G.html');
+            const isActive = currentPath === link.href;
 
             return `<a href="${link.href}" class="site-nav-link${isActive ? ' is-active' : ''}">${link.label}</a>`;
         })

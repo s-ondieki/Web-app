@@ -1,201 +1,480 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Travel Plan & Budget</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Plan & Budget | Safaris</title>
+    <style>
+        :root {
+            --page-bg: #f5ecdc;
+            --surface: rgba(255, 251, 243, 0.92);
+            --surface-strong: #fffdf8;
+            --surface-soft: #f2dfc1;
+            --text-main: #1f2b21;
+            --text-soft: #5c665d;
+            --accent: #a86539;
+            --accent-deep: #6a3822;
+            --gold: #d8a35d;
+            --forest: #486049;
+            --border: rgba(106, 56, 34, 0.14);
+            --shadow: 0 24px 60px rgba(67, 43, 24, 0.15);
+        }
 
-<style>
-body{
-font-family: Arial;
-background:#f4f4f4;
-margin:0;
-padding:0;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container{
-width:60%;
-margin:auto;
-background:white;
-padding:20px;
-margin-top:40px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-}
+        body {
+            font-family: 'Trebuchet MS', 'Gill Sans', 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(215, 181, 127, 0.28), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(104, 133, 86, 0.16), transparent 24%),
+                linear-gradient(180deg, #f8f3ea 0%, var(--page-bg) 48%, #efe2cc 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
 
-h2{
-text-align:center;
-}
+        .main-content {
+            flex: 1;
+            padding: 34px 20px 80px;
+        }
 
-input, select{
-width:100%;
-padding:10px;
-margin:8px 0;
-border:1px solid #ccc;
-border-radius:4px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-button{
-width:100%;
-padding:12px;
-background:#28a745;
-color:white;
-border:none;
-border-radius:4px;
-font-size:16px;
-cursor:pointer;
-}
+        .hero {
+            text-align: center;
+            margin-bottom: 48px;
+            background:
+                linear-gradient(rgba(28, 20, 14, 0.5), rgba(28, 20, 14, 0.58)),
+                url('assets/images/safari-background.avif') center/cover no-repeat;
+            border-radius: 34px;
+            padding: clamp(48px, 8vw, 88px) 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(49, 31, 18, 0.16);
+        }
 
-button:hover{
-background:#218838;
-}
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 18%),
+                linear-gradient(135deg, rgba(216, 163, 93, 0.15), transparent 40%);
+            pointer-events: none;
+        }
 
-.section{
-margin-top:20px;
-}
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            margin: 0 auto;
+        }
 
-.canvas{
-padding:16px;
-border-radius:10px;
-margin-top:10px;
-}
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 18px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 247, 235, 0.14);
+            border: 1px solid rgba(255, 244, 224, 0.2);
+            color: #fff4de;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
-.traveler-canvas{
-background:#f3f8ff;
-border:1px solid #cfe0ff;
-}
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4.6rem);
+            margin-bottom: 14px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #fff9ef;
+            text-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+        }
 
-.budget-canvas{
-background:#f4fff7;
-border:1px solid #c9ebd5;
-}
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.16rem);
+            color: rgba(255, 247, 235, 0.88);
+            max-width: 720px;
+            margin: 0 auto;
+        }
 
-.traveler-grid{
-display:grid;
-grid-template-columns:repeat(2, minmax(0, 1fr));
-gap:12px 16px;
-}
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-top: 48px;
+        }
 
-.budget-grid{
-display:grid;
-grid-template-columns:repeat(3, minmax(0, 1fr));
-gap:12px 16px;
-}
+        .form-section {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 249, 240, 0.88));
+            border-radius: 28px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
 
-.traveler-grid .full-width,
-.budget-grid .full-width{
-grid-column:1 / -1;
-}
+        .form-section h2 {
+            font-size: 1.7rem;
+            color: var(--accent-deep);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
 
-.field label{
-display:block;
-margin-bottom:4px;
-}
+        .form-section p {
+            color: var(--text-soft);
+            margin-bottom: 24px;
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
 
-.field input,
-.field select{
-margin:0;
-}
+        .field-group {
+            display: grid;
+            gap: 16px;
+        }
 
-@media (max-width:700px){
-.traveler-grid,
-.budget-grid{
-grid-template-columns:1fr;
-}
-}
-</style>
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
 
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--accent-deep);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(106, 56, 34, 0.14);
+            font-size: 0.97rem;
+            color: var(--text-main);
+            background: #fffdf9;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(168, 101, 57, 0.14);
+            background: #fffdf9;
+        }
+
+        input::placeholder {
+            color: rgba(92, 102, 93, 0.56);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px 24px;
+            margin-top: 8px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 16px 32px rgba(168, 101, 57, 0.24);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(168, 101, 57, 0.32);
+            filter: brightness(1.03);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .budget-summary {
+            background: linear-gradient(135deg, rgba(255, 250, 242, 0.95), rgba(255, 248, 238, 0.88));
+            border-radius: 18px;
+            padding: 18px 22px;
+            border: 1px solid rgba(168, 101, 57, 0.12);
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .budget-summary p {
+            margin: 0;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+        }
+
+        .budget-total {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-deep);
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 26px 16px 72px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 36px 18px;
+                border-radius: 24px;
+            }
+
+            .form-section {
+                border-radius: 22px;
+                padding: 24px;
+            }
+
+            .form-section h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Header -->
+    <div id="header"></div>
 
-<div class="container">
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <span class="eyebrow">Travel Planning</span>
+                    <h1>Plan Your Safari Budget</h1>
+                    <p>Organize your trip details and estimate costs for accommodation, transport, meals, and activities. Keep everything in one place for a stress-free planning experience.</p>
+                </div>
+            </section>
 
-<h2>Travel Plan & Budget</h2>
+            <!-- Form Sections -->
+            <div class="form-grid">
+                <!-- Traveler Details Form -->
+                <section class="form-section">
+                    <h2>Your Details</h2>
+                    <p>Start by telling us about yourself and your travel plans.</p>
 
-<form action="/save-plan" method="POST">
+                    <form id="planForm" method="POST">
+                        <div class="field-group">
+                            <div class="field">
+                                <label for="full_name">Full Name *</label>
+                                <input id="full_name" type="text" name="full_name" placeholder="Enter your full name" required>
+                            </div>
 
-<div class="section">
-<h3>Traveler Details</h3>
+                            <div class="field">
+                                <label for="email">Email Address *</label>
+                                <input id="email" type="email" name="email" placeholder="your@email.com" required>
+                            </div>
 
-<div class="canvas traveler-canvas">
-<div class="traveler-grid">
-<div class="field full-width">
-<label>Full Name</label>
-<input type="text" name="full_name" placeholder="Enter your full name" required>
-</div>
+                            <div class="field">
+                                <label for="phone">Phone Number</label>
+                                <input id="phone" type="tel" name="phone" placeholder="Enter phone number">
+                            </div>
 
-<div class="field">
-<label>ID / Passport Number</label>
-<input type="text" name="id_passport" placeholder="Enter ID or passport number">
-</div>
+                            <div class="field">
+                                <label for="id_passport">ID / Passport Number</label>
+                                <input id="id_passport" type="text" name="id_passport" placeholder="For travel documentation">
+                            </div>
 
-<div class="field">
-<label>Phone Number</label>
-<input type="text" name="phone" placeholder="Enter phone number">
-</div>
+                            <div class="field">
+                                <label for="destination">Destination *</label>
+                                <input id="destination" type="text" name="destination" placeholder="Where are you traveling to?">
+                            </div>
 
-<div class="field full-width">
-<label>Email</label>
-<input type="email" name="email" placeholder="Enter email">
-</div>
+                            <div class="two-col">
+                                <div class="field">
+                                    <label for="travel_date">Travel Date *</label>
+                                    <input id="travel_date" type="date" name="travel_date" required>
+                                </div>
+                                <div class="field">
+                                    <label for="return_date">Return Date *</label>
+                                    <input id="return_date" type="date" name="return_date" required>
+                                </div>
+                            </div>
 
-<div class="field full-width">
-<label>Destination</label>
-<input type="text" name="destination" placeholder="Where are you traveling to?">
-</div>
+                            <button type="submit" class="submit-btn">Save Travel Details</button>
+                        </div>
+                    </form>
 
-<div class="field">
-<label>Travel Date</label>
-<input type="date" name="travel_date">
-</div>
+                    <script>
+                        document.getElementById('planForm').addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            const formData = {
+                                full_name: document.getElementById('full_name').value,
+                                email: document.getElementById('email').value,
+                                phone: document.getElementById('phone').value,
+                                id_passport: document.getElementById('id_passport').value,
+                                destination: document.getElementById('destination').value,
+                                travel_date: document.getElementById('travel_date').value,
+                                return_date: document.getElementById('return_date').value
+                            };
+                            
+                            try {
+                                const response = await fetch('http://localhost:3000/api/plan', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(formData)
+                                });
+                                
+                                const data = await response.json();
+                                
+                                if (response.ok && data.success) {
+                                    alert('Travel details saved successfully!');
+                                } else {
+                                    alert('Failed to save: ' + (data.error || 'Please try again.'));
+                                }
+                            } catch (error) {
+                                console.error('Plan error:', error);
+                                alert('Error: ' + error.message);
+                            }
+                        });
+                    </script>
+                </section>
 
-<div class="field">
-<label>Return Date</label>
-<input type="date" name="return_date">
-</div>
-</div>
-</div>
-</div>
+                <!-- Budget Estimation Form -->
+                <section class="form-section">
+                    <h2>Budget Estimate</h2>
+                    <p>Break down your estimated spending across key travel categories.</p>
 
+                    <form id="budgetForm" method="POST">
+                        <div class="field-group">
+                            <div class="field">
+                                <label for="transport_cost">Transport Cost</label>
+                                <input id="transport_cost" type="number" name="transport_cost" placeholder="Flights, transfers" min="0" step="0.01">
+                            </div>
 
-<div class="section">
-<h3>Estimated Travel Budget</h3>
+                            <div class="field">
+                                <label for="accommodation_cost">Accommodation Cost</label>
+                                <input id="accommodation_cost" type="number" name="accommodation_cost" placeholder="Lodge, hotel stays" min="0" step="0.01">
+                            </div>
 
-<div class="canvas budget-canvas">
-<div class="budget-grid">
-<div class="field">
-<label>Transport Cost</label>
-<input type="number" name="transport_cost" placeholder="Transport cost" min="0">
-</div>
+                            <div class="field">
+                                <label for="food_cost">Food & Dining</label>
+                                <input id="food_cost" type="number" name="food_cost" placeholder="Meals and refreshments" min="0" step="0.01">
+                            </div>
 
-<div class="field">
-<label>Accommodation Cost</label>
-<input type="number" name="accommodation_cost" placeholder="Accommodation cost" min="0">
-</div>
+                            <div class="field">
+                                <label for="activities_cost">Activities & Tours</label>
+                                <input id="activities_cost" type="number" name="activities_cost" placeholder="Game drives, guide fees" min="0" step="0.01">
+                            </div>
 
-<div class="field">
-<label>Food Cost</label>
-<input type="number" name="food_cost" placeholder="Food cost" min="0">
-</div>
+                            <div class="field">
+                                <label for="emergency_money">Emergency Fund</label>
+                                <input id="emergency_money" type="number" name="emergency_money" placeholder="Contingency amount" min="0" step="0.01">
+                            </div>
 
-<div class="field">
-<label>Activities Cost</label>
-<input type="number" name="activities_cost" placeholder="Activities cost" min="0">
-</div>
+                            <div class="budget-summary">
+                                <p>Estimated Total Budget:</p>
+                                <div class="budget-total" id="budgetTotal">$0</div>
+                            </div>
 
-<div class="field full-width">
-<label>Emergency Money</label>
-<input type="number" name="emergency_money" placeholder="Emergency funds" min="0">
-</div>
-</div>
-</div>
+                            <button class="submit-btn" type="submit">Save Budget</button>
+                        </div>
+                    </form>
 
-</div>
+                    <script>
+                        document.getElementById('budgetForm').addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            const budgetData = {
+                                transport_cost: parseFloat(document.getElementById('transport_cost').value) || 0,
+                                accommodation_cost: parseFloat(document.getElementById('accommodation_cost').value) || 0,
+                                food_cost: parseFloat(document.getElementById('food_cost').value) || 0,
+                                activities_cost: parseFloat(document.getElementById('activities_cost').value) || 0,
+                                emergency_money: parseFloat(document.getElementById('emergency_money').value) || 0
+                            };
+                            
+                            try {
+                                const response = await fetch('http://localhost:3000/api/budget', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(budgetData)
+                                });
+                                
+                                const data = await response.json();
+                                
+                                if (response.ok && data.success) {
+                                    alert('Budget saved successfully!');
+                                } else {
+                                    alert('Failed to save: ' + (data.error || 'Please try again.'));
+                                }
+                            } catch (error) {
+                                console.error('Budget error:', error);
+                                alert('Error: ' + error.message);
+                            }
+                        });
+                    </script>
+                </section>
+            </div>
+        </div>
+    </main>
 
-<button type="submit">Submit Travel Plan</button>
+    <!-- Footer -->
+    <div id="footer"></div>
 
-</form>
+    <!-- Components -->
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
 
-</div>
+    <!-- Budget Calculator Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const budgetFields = ['transport_cost', 'accommodation_cost', 'food_cost', 'activities_cost', 'emergency_money'];
+            const budgetTotal = document.getElementById('budgetTotal');
 
+            function updateBudget() {
+                let total = 0;
+                budgetFields.forEach(fieldId => {
+                    const value = parseFloat(document.getElementById(fieldId).value) || 0;
+                    total += value;
+                });
+                budgetTotal.textContent = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            budgetFields.forEach(fieldId => {
+                document.getElementById(fieldId).addEventListener('input', updateBudget);
+            });
+        });
+    </script>
 </body>
 </html>

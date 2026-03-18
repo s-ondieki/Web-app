@@ -415,7 +415,7 @@
                     <div class="line"></div>
                 </div>
 
-                <form class="contact-form" action="#" method="post">
+                <form class="contact-form" id="contactForm" method="post">
                     <label for="name">Your name</label>
                     <input id="name" name="name" type="text" placeholder="Enter your full name" required>
 
@@ -430,6 +430,36 @@
 
                     <button class="submit-btn" type="submit">Submit</button>
                 </form>
+
+                <script>
+                    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        const name = document.getElementById('name').value;
+                        const email = document.getElementById('email').value;
+                        const subject = document.getElementById('subject').value;
+                        const message = document.getElementById('message').value;
+                        
+                        try {
+                            const response = await fetch('http://localhost:3000/api/contact', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ name, email, subject, message })
+                            });
+                            
+                            const data = await response.json();
+                            
+                            if (response.ok && data.success) {
+                                alert('Thank you! We have received your message and will get back to you soon.');
+                                this.reset();
+                            } else {
+                                alert('Failed to submit: ' + (data.error || 'Please try again.'));
+                            }
+                        } catch (error) {
+                            console.error('Contact error:', error);
+                            alert('Error: ' + error.message);
+                        }
+                    });
+                </script>
             </div>
         </section>
     </main>
