@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <header class="site-header">
             <div class="site-header-inner">
                 <a href="home.html" class="site-brand" aria-label="Travel Companion home">
-                    <span class="site-brand-mark">T</span>
+                    <span class="site-brand-mark">🦁</span>
                     <span class="site-brand-text">
                         <span class="site-brand-title">Travel Companion</span>
                         <span class="site-brand-subtitle">Finder</span>
