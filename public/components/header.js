@@ -187,11 +187,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerHTML = `
         <header class="site-header">
             <div class="site-header-inner">
-                <a href="home.html" class="site-brand" aria-label="Travel Companion home">
-                    <span class="site-brand-mark">T</span>
+                <a href="home.html" class="site-brand" aria-label="Travel Safari  home">
+                    <span class="site-brand-mark">🦁s</span>
                     <span class="site-brand-text">
-                        <span class="site-brand-title">Travel Companion</span>
-                        <span class="site-brand-subtitle">Finder</span>
+                        <span class="site-brand-title">Travel Safari </span>
+                        <span class="site-brand-subtitle"></span>
                     </span>
                 </a>
 

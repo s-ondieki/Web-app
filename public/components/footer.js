@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <footer class="site-footer">
             <div class="site-footer-inner">
                 <div class="site-footer-brand">
-                    <h3 class="site-footer-title">Travel Companion Finder</h3>
+                    <h3 class="site-footer-title">Travel Safari  </h3>
                     <p class="site-footer-tagline">Curating safari moments, cultural stories, and practical planning tools for unforgettable journeys.</p>
                 </div>
 
@@ -110,8 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </nav>
 
                 <p class="site-footer-copy">
-                    &copy; ${currentYear} Travel Companion Finder.<br>
-                    All rights reserved.
+                    &copy; ${currentYear} Travel Safari   All rights reserved.<br>
                 </p>
             </div>
         </footer>
