@@ -360,117 +360,67 @@
         </div>
     </main>
 
-
+    
     <script>
-        console.log('Register page loaded');
-
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('registerForm');       // your form id
+        const errorDiv = document.querySelector('.error-message');
+        const successDiv = document.querySelector('.success-message');
+        const registerBtn = document.getElementById('registerButton');
+    
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            console.log('Form submitted');
-
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const confirmPassword = document.getElementById('confirmPassword').value.trim();
-
-            const errorDiv = document.getElementById('errorMessage');
-            const successDiv = document.getElementById('successMessage');
-            const registerBtn = document.getElementById('registerBtn');
-
-            // Clear previous messages
+    
             errorDiv.classList.remove('show');
             successDiv.classList.remove('show');
-
-            // Client-side validation
-            if (!name || !email || !password || !confirmPassword) {
-                console.log('Missing required fields');
-                errorDiv.textContent = 'All fields are required';
+    
+            const fullName = form.fullName.value.trim();   // <input name="fullName">
+            const email = form.email.value.trim();
+            const password = form.password.value;
+    
+            if (!fullName || !email || !password) {
+                errorDiv.textContent = 'Please fill in all fields.';
                 errorDiv.classList.add('show');
                 return;
             }
-
-            if (password.length < 6) {
-                console.log('Password too short');
-                errorDiv.textContent = 'Password must be at least 6 characters long';
-                errorDiv.classList.add('show');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                console.log('Passwords do not match');
-                errorDiv.textContent = 'Passwords do not match';
-                errorDiv.classList.add('show');
-                return;
-            }
-
-            // Email format validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                console.log('Invalid email format');
-                errorDiv.textContent = 'Please enter a valid email address';
-                errorDiv.classList.add('show');
-                return;
-            }
-
-            // Disable button and show loading state
+    
+            const originalText = registerBtn.textContent;
             registerBtn.disabled = true;
-            registerBtn.textContent = 'Creating Account...';
-
+            registerBtn.textContent = 'Creating account...';
+    
             try {
-                console.log('Sending registration request for:', { name, email });
-
-                const response = await fetch('http://localhost:3000/api/auth/register', {
+                const res = await fetch('http://localhost:4000/api/register', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, password })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, email, password })
                 });
-
-                console.log('Response status:', response.status);
-                const data = await response.json();
-                console.log('Response data:', data);
-
-                if (response.ok && data.success) {
-                    console.log('Registration successful, user:', data.user);
-                    
-                    // Store user data
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    localStorage.setItem('userId', data.user.id);
-
-                    successDiv.textContent = 'Account created successfully! Redirecting to home...';
-                    successDiv.classList.add('show');
-
-                    setTimeout(() => {
-                        window.location.href = 'home.html';
-                    }, 1500);
-                } else {
-                    console.log('Registration failed:', data.error || data.message);
-                    
-                    // Show specific error messages
-                    if (response.status === 409) {
-                        errorDiv.textContent = 'This email is already registered. Please login or use a different email.';
-                    } else if (data.error) {
-                        errorDiv.textContent = data.error;
-                    } else if (data.message) {
-                        errorDiv.textContent = data.message;
-                    } else {
-                        errorDiv.textContent = 'Registration failed. Please try again.';
-                    }
-
+    
+                const data = await res.json();
+    
+                if (!res.ok) {
+                    errorDiv.textContent = data.message || 'Registration failed. Please try again.';
                     errorDiv.classList.add('show');
-                    registerBtn.disabled = false;
-                    registerBtn.textContent = 'Create Account';
+                } else {
+                    successDiv.textContent = data.message || 'Registration successful.';
+                    successDiv.classList.add('show');
+    
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
                 }
-            } catch (error) {
-                console.error('Network error:', error);
-                errorDiv.textContent = 'Network error: ' + error.message;
+            } catch (err) {
+                console.error('Network error:', err);
+                errorDiv.textContent = 'Network error: ' + err.message;
                 errorDiv.classList.add('show');
+            } finally {
                 registerBtn.disabled = false;
-                registerBtn.textContent = 'Create Account';
+                registerBtn.textContent = originalText;
             }
         });
-        div id="footer"></div>
+    });
+    </script>
+    
+    <div id="footer"></div>
 
 <script src="components/footer.js"></script>
 </body>
