@@ -1,234 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦁Safaris.com</title>
-    <style>
-        :root {
-            --surface: rgba(255, 251, 244, 0.9);
-            --surface-soft: rgba(255, 247, 234, 0.14);
-            --text-main: #1d281f;
-            --text-soft: #5f685f;
-            --accent: #a6633b;
-            --accent-deep: #6d3922;
-            --gold: #d4a060;
-            --forest: #466248;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safari Journeys – Plan Your African Getaway</title>
 
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --bg-alt: #ffffff;
+      --text: #2b241b;
+      --muted: #6d6458;
+      --accent: #c07a3f;
+      --accent-soft: #f4dfc5;
+      --border-soft: #e3d3bd;
+      --error: #c0392b;
+    }
 
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background:
-                linear-gradient(rgba(23, 15, 10, 0.52), rgba(23, 15, 10, 0.62)),
-                url('assets/images/safari-background.avif') center/cover no-repeat;
-            font-family: 'Trebuchet MS', 'Gill Sans', 'Segoe UI', sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .container {
-            width: min(100%, 920px);
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.9fr);
-            gap: 24px;
-            padding: 24px;
-            border-radius: 34px;
-            background: linear-gradient(180deg, rgba(35, 24, 16, 0.55), rgba(35, 24, 16, 0.38));
-            border: 1px solid rgba(255, 244, 224, 0.15);
-            box-shadow: 0 30px 80px rgba(14, 9, 6, 0.36);
-            backdrop-filter: blur(10px);
-        }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        h1 {
-            margin: 0 0 14px;
-            font-size: clamp(2.2rem, 5vw, 3.9rem);
-            line-height: 1.05;
-            color: #fff8ed;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .hero {
-            border-radius: 28px;
-            padding: clamp(26px, 4vw, 42px);
-            background: linear-gradient(135deg, var(--surface-soft), rgba(255, 247, 234, 0.08));
-            border: 1px solid rgba(255, 244, 224, 0.16);
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 14px;
-            border-radius: 999px;
-            margin-bottom: 20px;
-            background: rgba(255, 248, 236, 0.14);
-            color: #f4ddbb;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-        }
+    /* Layout */
 
-        .hero p {
-            margin: 0;
-            color: #f1e8db;
-            line-height: 1.8;
-            max-width: 520px;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 242, 234, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(227, 211, 189, 0.7);
+    }
 
-        .stat-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
-        }
+    .nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
 
-        .stat-chip {
-            min-width: 140px;
-            padding: 14px 16px;
-            border-radius: 18px;
-            background: rgba(255, 248, 236, 0.12);
-            border: 1px solid rgba(255, 244, 224, 0.16);
-        }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
 
-        .stat-chip strong {
-            display: block;
-            color: #fff8ed;
-            font-size: 1.25rem;
-        }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 40%;
+      background: #2f2418;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
 
-        .stat-chip span {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ead9bc;
-        }
+    .logo-text {
+      font-size: 1.05rem;
+    }
 
-        .action-panel {
-            border-radius: 28px;
-            padding: 28px;
-            background: linear-gradient(180deg, var(--surface), rgba(255, 247, 235, 0.9));
-            color: var(--text-main);
-            box-shadow: 0 20px 50px rgba(14, 9, 6, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.92rem;
+    }
 
-        .action-panel h2 {
-            margin: 0 0 8px;
-            color: var(--accent-deep);
-            font-size: 1.8rem;
-        }
+    .nav-links a {
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
 
-        .action-panel p {
-            margin: 0 0 18px;
-            color: var(--text-soft);
-            line-height: 1.7;
-        }
+    .nav-links a:hover {
+      border-bottom-color: var(--accent);
+    }
 
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin: 10px 0;
-            padding: 13px;
-            text-decoration: none;
-            color: white;
-            border-radius: 999px;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease;
-        }
+    .nav-cta {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font-size: 0.9rem;
+      background: #fff;
+    }
 
-        .register {
-            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
-            box-shadow: 0 16px 30px rgba(166, 99, 59, 0.28);
-        }
+    .nav-cta:hover {
+      background: var(--accent-soft);
+    }
 
-        .register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 36px rgba(166, 99, 59, 0.34);
-            filter: brightness(1.03);
-        }
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.8rem 1.5rem 2.5rem;
+    }
 
-        .login {
-            background: linear-gradient(90deg, var(--forest) 0%, #5e7f5f 100%);
-            box-shadow: 0 16px 30px rgba(70, 98, 72, 0.26);
-        }
+    /* Hero */
 
-        .login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 36px rgba(70, 98, 72, 0.32);
-            filter: brightness(1.03);
-        }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
 
-        @media (max-width: 860px) {
-            body {
-                height: auto;
-                min-height: 100vh;
-            }
+    .hero-text h1 {
+      font-size: 2.1rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
 
-            .container {
-                grid-template-columns: 1fr;
-                padding: 16px;
-                border-radius: 24px;
-            }
+    .hero-text p {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      max-width: 32rem;
+    }
 
-            .hero,
-            .action-panel {
-                border-radius: 22px;
-            }
-        }
+    .hero-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
 
-        @media (max-width: 520px) {
-            body {
-                padding: 12px;
-            }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
 
-            .hero,
-            .action-panel {
-                padding: 20px;
-            }
-        }
-    </style>
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .btn-secondary {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px dashed var(--border-soft);
+      background: var(--bg-alt);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .btn-secondary:hover {
+      border-style: solid;
+    }
+
+    .hero-card {
+      background: var(--bg-alt);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      padding: 1rem 1rem 0.9rem;
+      box-shadow: 0 10px 25px rgba(15, 10, 2, 0.05);
+    }
+
+    .hero-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .hero-card-list li + li {
+      margin-top: 0.4rem;
+    }
+
+    /* Sections */
+
+    .section {
+      margin-bottom: 2.3rem;
+      padding: 1.3rem 1.1rem;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-soft);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .section-body {
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .travel-grid {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    .travel-item {
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .travel-item h3 {
+      margin: 0 0 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .travel-item p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #4b3420;
+      border: 1px solid rgba(192, 122, 63, 0.35);
+      white-space: nowrap;
+    }
+
+    .aside-note {
+      margin-top: 0.7rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid rgba(227, 211, 189, 0.9);
+      padding: 1.1rem 1.5rem 1.4rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Small screen tweaks */
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #footer footer {
+        padding-inline: 0rem;
+      }
+
+      main {
+        padding-inline: 1rem;
+      }
+
+      header {
+        position: static;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div id="header"></div>
+  
 
-<div class="container">
+  <main>
+    <!-- Hero -->
     <section class="hero">
-        <div class="eyebrow">Travel Safari  </div>
-        <h1>Start your next journey with confidence.</h1>
-        <p>Discover destinations, map your budget, and plan meaningful adventures through a clean, modern travel Safari  experience.</p>
-        <div class="stat-row">
-            <div class="stat-chip">
-                <strong>Safari</strong>
-                <span>Inspired Design</span>
-            </div>
-            <div class="stat-chip">
-                <strong>Simple</strong>
-                <span>Planning Flow</span>
-            </div>
-            <div class="stat-chip">
-                <strong>Fast</strong>
-                <span>Get Started</span>
-            </div>
+      <div class="hero-text">
+        <h1>Plan a safari that actually fits your life</h1>
+        <p>
+          No glossy brochure fluff. Just honest guidance to help you choose where to go,
+          when to travel, and how much you’ll really spend.
+        </p>
+
+        <p class="hero-note">
+          Tell us roughly what you have in mind, and we’ll help you turn it into a trip
+          you’d actually take – not just daydream about.
+        </p>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn-primary">Start planning</a>
+          <a href="safaris.html" class="btn-secondary">Browse real itineraries</a>
         </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-title">A quick snapshot of what you get</div>
+        <ul class="hero-card-list">
+          <li>• A simple way to track flights, stays, and park fees in one place.</li>
+          <li>• A budget view that doesn’t hide the “awkward” costs like tips or transfers.</li>
+          <li>• Destination notes based on what first‑time visitors actually ask.</li>
+        </ul>
+      </aside>
     </section>
 
-    <aside class="action-panel">
-        <h2>Get Started</h2>
-        <p>Create an account to begin planning, or log in to continue your saved travel journey.</p>
-        <a href="register.html" class="btn register">Register</a>
-        <a href="login.html" class="btn login">Login</a>
-    </aside>
-</div>
+    <!-- Section: Where people usually start -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Getting started</p>
+          <h2 class="section-title">Not sure where to begin? That’s normal.</h2>
+        </div>
+      </div>
 
+      <div class="section-body">
+        <p>
+          Most folks land here with a rough idea like “maybe Kenya next year” and a
+          half‑baked budget. That’s enough. You don’t need a full plan to start;
+          you just need a starting point.
+        </p>
+
+        <div class="travel-grid">
+          <article class="travel-item">
+            <div>
+              <h3>“I just want to see wildlife”</h3>
+              <p>
+                We’ll nudge you toward parks and reserves that fit your time and comfort level,
+                without pretending you’re a professional photographer.
+              </p>
+            </div>
+            <span class="chip">First‑time trips</span>
+          </article>
+
+          <article class="travel-item">
+            <div>
+              <h3>“I’m watching my budget”</h3>
+              <p>
+                Get a realistic sense of what things cost: not just lodges, but transport,
+                park fees, food, and that “just in case” emergency fund.
+              </p>
+            </div>
+            <span class="chip">Budget view</span>
+          </article>
+
+          <article class="travel-item">
+            <div>
+              <h3>“I’ve got a specific country in mind”</h3>
+              <p>
+                Jump straight to our destinations and see what a simple 5–7 day trip
+                might look like for you.
+              </p>
+            </div>
+            <span class="chip">Country guides</span>
+          </article>
+        </div>
+
+        <p class="aside-note">
+          You don’t have to finish everything in one sitting. Save your plan, come back later,
+          and tweak it when your dates or budget change.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section: How the planner works -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">The planner</p>
+          <h2 class="section-title">A simple tool, not another travel app</h2>
+        </div>
+      </div>
+
+      <div class="section-body">
+        <p>
+          The planner is built around a basic idea: if you can write it down, you can decide
+          whether it’s worth it. No feeds, no pop‑ups, no endless checklists.
+        </p>
+
+        <ul style="padding-left: 1.1rem; margin: 0.7rem 0 0.3rem; font-size: 0.9rem; color: var(--muted);">
+          <li>Keep track of your flights, lodges, and transfers in one timeline.</li>
+          <li>See how every choice nudges your budget up or down.</li>
+          <li>Save a version that feels right for you, not for social media.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Component loaders (adjust paths/names to match your project) -->
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

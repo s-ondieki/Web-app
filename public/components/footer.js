@@ -1,123 +1,123 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const currentYear = new Date().getFullYear();
-
-    if (!document.getElementById('site-footer-style')) {
-        const style = document.createElement('style');
-        style.id = 'site-footer-style';
-        style.textContent = `
-            .site-footer {
-                margin-top: 64px;
-                padding: 28px 18px;
-                background: rgba(25, 16, 11, 0.72);
-                border-top: 1px solid rgba(255, 241, 215, 0.14);
-                backdrop-filter: blur(10px);
-                font-family: 'Montserrat', 'Century Gothic', sans-serif;
-                color: #e9dbc2;
-            }
-
-            .site-footer-inner {
-                max-width: 1160px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: 1.2fr 1fr auto;
-                gap: 20px;
-                align-items: center;
-            }
-
-            .site-footer-brand {
-                display: grid;
-                gap: 8px;
-            }
-
-            .site-footer-title {
-                margin: 0;
-                color: #fff8ed;
-                font-size: 1.05rem;
-                font-weight: 800;
-                letter-spacing: 0.03em;
-            }
-
-            .site-footer-tagline {
-                margin: 0;
-                color: #d8c7ab;
-                font-size: 0.84rem;
-                line-height: 1.7;
-            }
-
-            .site-footer-links {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .site-footer-link {
-                text-decoration: none;
-                color: #f6e9d4;
-                font-size: 0.8rem;
-                font-weight: 700;
-                padding: 8px 12px;
-                border-radius: 999px;
-                border: 1px solid rgba(255, 241, 215, 0.14);
-                background: rgba(255, 248, 236, 0.06);
-                transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-            }
-
-            .site-footer-link:hover {
-                color: #3d2413;
-                background: linear-gradient(90deg, #f1c589 0%, #dda563 100%);
-                border-color: rgba(241, 197, 137, 0.4);
-            }
-
-            .site-footer-copy {
-                margin: 0;
-                text-align: right;
-                color: #cab89a;
-                font-size: 0.78rem;
-                line-height: 1.7;
-            }
-
-            @media (max-width: 900px) {
-                .site-footer-inner {
-                    grid-template-columns: 1fr;
-                    text-align: center;
-                }
-
-                .site-footer-links {
-                    justify-content: center;
-                }
-
-                .site-footer-copy {
-                    text-align: center;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+document.addEventListener('DOMContentLoaded', () => {
+    const mount = document.getElementById('footer');
+    if (!mount) return;
+  
+    // Inject styles once
+    if (!document.getElementById('site-footer-styles')) {
+      const style = document.createElement('style');
+      style.id = 'site-footer-styles';
+      style.textContent = `
+        :root{
+          --accent:#c07a3f;
+          --border: rgba(255,255,255,.14);
+  
+          --max: 980px;
+          --pad: 1.25rem;
+        }
+  
+        .site-footer{
+          background:#000;
+          border-top: 1px solid var(--border);
+        }
+  
+        .site-footer-inner{
+          max-width: var(--max);
+          margin: 0 auto;
+          padding: 1.1rem var(--pad) 1.3rem;
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+  
+        .site-footer-brand{
+          display:flex;
+          gap:.6rem;
+          align-items:center;
+          color:#fff;
+        }
+  
+        .site-footer-mark{
+          width: 28px;
+          height: 28px;
+          border-radius: 9px;
+          display:grid;
+          place-items:center;
+          background:#111;
+          border: 1px solid rgba(255,255,255,.14);
+          color:#fff;
+          font-size: 1rem;
+        }
+  
+        .site-footer-title{
+          font-weight: 750;
+          letter-spacing:.02em;
+          line-height:1.1;
+        }
+  
+        .site-footer-sub{
+          display:block;
+          font-size:.85rem;
+          color: rgba(255,255,255,.68);
+          line-height:1.2;
+        }
+  
+        .site-footer-links{
+          display:flex;
+          gap: .9rem;
+          flex-wrap: wrap;
+          align-items:center;
+        }
+  
+        .site-footer-links a{
+          color: rgba(255,255,255,.78);
+          text-decoration:none;
+          font-size: .9rem;
+        }
+  
+        .site-footer-links a:hover{
+          color:#fff;
+          text-decoration: underline;
+        }
+  
+        .site-footer-copy{
+          color: rgba(255,255,255,.62);
+          font-size: .86rem;
+          white-space: nowrap;
+        }
+  
+        @media (max-width: 720px){
+          .site-footer-inner{ justify-content:center; text-align:center; }
+          .site-footer-copy{ white-space: normal; }
+          .site-footer-links{ justify-content:center; }
+        }
+      `;
+      document.head.appendChild(style);
     }
-
-    const footerHTML = `
-        <footer class="site-footer">
-            <div class="site-footer-inner">
-                <div class="site-footer-brand">
-                    <h3 class="site-footer-title">Travel Safari  </h3>
-                    <p class="site-footer-tagline">Curating safari moments, cultural stories, and practical planning tools for unforgettable journeys.</p>
-                </div>
-
-                <nav class="site-footer-links" aria-label="Footer quick links">
-                    <a href="home.html" class="site-footer-link">Home</a>
-                    <a href="destination.html" class="site-footer-link">Destinations</a>
-                    <a href="safaris.html" class="site-footer-link">Safaris</a>
-                    <a href="contact.html" class="site-footer-link">Contact</a>
-                </nav>
-
-                <p class="site-footer-copy">
-                    &copy; ${currentYear} Travel Safari   All rights reserved.<br>
-                </p>
+  
+    const year = new Date().getFullYear();
+  
+    mount.innerHTML = `
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div class="site-footer-brand">
+            <span class="site-footer-mark">🦁</span>
+            <div>
+              <span class="site-footer-title">Safari</span>
+              <span class="site-footer-sub">Keep it simple. Then go.</span>
             </div>
-        </footer>
+          </div>
+  
+          <nav class="site-footer-links" aria-label="Footer">
+            <a href="destination.html">Destinations</a>
+            <a href="safaris.html">Safaris</a>
+            <a href="plan.html">Plan</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+  
+          <div class="site-footer-copy">© ${year} Safari</div>
+        </div>
+      </footer>
     `;
-
-    const footerPlaceholder = document.getElementById('footer');
-    if (footerPlaceholder) {
-        footerPlaceholder.innerHTML = footerHTML;
-    }
-});
+  });

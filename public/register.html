@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦁Register-Safari</title>
+    <title>Safari | Create account</title>
     <style>
         * {
             margin: 0;
@@ -13,18 +13,20 @@
 
         :root {
             --accent: #a86539;
-            --surface: rgba(255, 255, 255, 0.7);
-            --surface-hover: rgba(255, 255, 255, 0.9);
-            --text-main: #2c2c2c;
-            --text-light: #666;
-            --border: rgba(255, 255, 255, 0.3);
-            --error: #c33;
-            --success: #28a745;
+            --accent-soft: #d48d59;
+            --surface: rgba(255, 252, 246, 0.8);
+            --text-main: #2f241c;
+            --text-light: #6f6258;
+            --border: rgba(255, 255, 255, 0.35);
+            --error: #ba3a3a;
+            --success: #247e46;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #6B4423 100%);
+            font-family: "Avenir Next", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                linear-gradient(rgba(30, 19, 13, 0.56), rgba(30, 19, 13, 0.68)),
+                url('assets/images/safari-background.avif') center/cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -35,10 +37,10 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 247, 235, 0.13);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+            padding: 1rem 1.6rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,7 +52,7 @@
             gap: 0.5rem;
             font-weight: 700;
             font-size: 1.25rem;
-            color: var(--accent);
+            color: #f7e5cc;
             text-decoration: none;
         }
 
@@ -84,18 +86,20 @@
         }
 
         .btn {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-soft));
             color: white;
             border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.68rem 1.5rem;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 0.95rem;
-            transition: all 0.3s;
+            transition: all 0.25s;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(168, 101, 57, 0.22);
         }
 
         .btn:hover {
-            background: #925430;
+            filter: brightness(1.04);
             transform: translateY(-2px);
         }
 
@@ -110,18 +114,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 2.6rem 1rem;
         }
 
         .register-container {
             background: var(--surface);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
+            border-radius: 20px 18px 24px 14px;
+            padding: 2.4rem 2.2rem 2.1rem;
             width: 100%;
-            max-width: 450px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 470px;
+            box-shadow: 0 18px 44px rgba(18, 11, 8, 0.26);
+            animation: entrance 0.45s ease;
         }
 
         .register-header {
@@ -130,42 +135,45 @@
         }
 
         .register-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.05rem;
+            margin-bottom: 0.65rem;
+            letter-spacing: -0.02em;
         }
 
         .register-header p {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.55;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.15rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text-main);
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 650;
+            font-size: 0.92rem;
         }
 
         input {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.82rem 1rem;
             border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            font-size: 0.99rem;
+            background: rgba(255, 255, 255, 0.56);
             color: var(--text-main);
-            transition: all 0.3s;
+            transition: all 0.22s;
         }
 
         input:focus {
             outline: none;
             border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 0 0 3px rgba(168, 101, 57, 0.14);
         }
 
         input::placeholder {
@@ -175,7 +183,7 @@
         .form-actions {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .form-actions button {
@@ -195,9 +203,9 @@
 
         .login-link {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1.3rem;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
 
         .login-link a {
@@ -213,7 +221,7 @@
         .error-message {
             padding: 1rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             background: rgba(220, 53, 69, 0.15);
             color: var(--error);
             border: 1px solid rgba(220, 53, 69, 0.3);
@@ -228,7 +236,7 @@
         .success-message {
             padding: 1rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             background: rgba(40, 167, 69, 0.15);
             color: var(--success);
             border: 1px solid rgba(40, 167, 69, 0.3);
@@ -241,28 +249,39 @@
         }
 
         footer {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 250, 241, 0.08);
             border-top: 1px solid var(--border);
             padding: 2rem;
             text-align: center;
-            color: var(--text-light);
+            color: #efddc4;
             font-size: 0.9rem;
         }
 
         .password-requirements {
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             color: var(--text-light);
             margin-top: 0.25rem;
             line-height: 1.4;
         }
 
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 600px) {
             .register-container {
-                padding: 2rem;
+                padding: 1.8rem 1.3rem 1.4rem;
             }
 
             .register-header h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
             header {
@@ -283,18 +302,18 @@
     <header>
         <a href="home.html" class="logo">
             <div class="logo-mark">🦁</div>
-            <span>Safari </span>
+            <span>Safari</span>
         </a>
         <nav>
-            <a href="login.html">Login</a>
+            <a href="login.html">Already a member?</a>
         </nav>
     </header>
 
     <main>
         <div class="register-container">
             <div class="register-header">
-                <h1>Join the Journey</h1>
-                <p>Create your Safari account</p>
+                <h1>Let's set up your account</h1>
+                <p>It takes under a minute, then you can start saving routes and budgets.</p>
             </div>
 
             <div id="errorMessage" class="error-message"></div>
@@ -302,18 +321,18 @@
 
             <form id="registerForm">
                 <div class="form-group">
-                    <label for="name">Full Name *</label>
+                    <label for="name">Full name *</label>
                     <input 
                         type="text" 
                         id="name" 
                         name="name" 
-                        placeholder="Your full name"
+                        placeholder="What should we call you?"
                         required
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
+                    <label for="email">Email address *</label>
                     <input 
                         type="email" 
                         id="email" 
@@ -333,29 +352,29 @@
                         required
                     >
                     <div class="password-requirements">
-                        Minimum 6 characters required
+                        Use at least 6 characters.
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password *</label>
+                    <label for="confirmPassword">Confirm password *</label>
                     <input 
                         type="password" 
                         id="confirmPassword" 
                         name="confirmPassword" 
-                        placeholder="Re-enter your password"
+                        placeholder="Type it again"
                         required
                     >
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" id="registerBtn" class="btn">Create Account</button>
-                    <a href="home.html" class="btn btn-secondary" style="text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    <button type="submit" id="registerBtn" class="btn">Create account</button>
+                    <a href="home.html" class="btn btn-secondary" style="text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center;">Not now</a>
                 </div>
             </form>
 
             <div class="login-link">
-                Already have an account? <a href="login.html">Login here</a>
+                Already set up? <a href="login.html">Log in here</a>
             </div>
         </div>
     </main>
@@ -363,54 +382,70 @@
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('registerForm');       // your form id
-        const errorDiv = document.querySelector('.error-message');
-        const successDiv = document.querySelector('.success-message');
-        const registerBtn = document.getElementById('registerButton');
-    
+        const form = document.getElementById('registerForm');
+        const errorDiv = document.getElementById('errorMessage');
+        const successDiv = document.getElementById('successMessage');
+        const registerBtn = document.getElementById('registerBtn');
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-    
+
             errorDiv.classList.remove('show');
             successDiv.classList.remove('show');
-    
-            const fullName = form.fullName.value.trim();   // <input name="fullName">
+            errorDiv.textContent = '';
+            successDiv.textContent = '';
+
+            // form field has name="name", so we access it via form.name
+            const fullName = form.name.value.trim();
             const email = form.email.value.trim();
             const password = form.password.value;
-    
-            if (!fullName || !email || !password) {
+            const confirmPassword = form.confirmPassword.value;
+
+            if (!fullName || !email || !password || !confirmPassword) {
                 errorDiv.textContent = 'Please fill in all fields.';
                 errorDiv.classList.add('show');
                 return;
             }
-    
+
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters.';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match.';
+                errorDiv.classList.add('show');
+                return;
+            }
+
             const originalText = registerBtn.textContent;
             registerBtn.disabled = true;
             registerBtn.textContent = 'Creating account...';
-    
+
             try {
                 const res = await fetch('http://localhost:4000/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ fullName, email, password })
                 });
-    
+
                 const data = await res.json();
-    
+
                 if (!res.ok) {
                     errorDiv.textContent = data.message || 'Registration failed. Please try again.';
                     errorDiv.classList.add('show');
                 } else {
-                    successDiv.textContent = data.message || 'Registration successful.';
+                    successDiv.textContent = data.message || 'Registration successful! Redirecting to login...';
                     successDiv.classList.add('show');
-    
+
                     setTimeout(() => {
                         window.location.href = 'login.html';
                     }, 1500);
                 }
             } catch (err) {
                 console.error('Network error:', err);
-                errorDiv.textContent = 'Network error: ' + err.message;
+                errorDiv.textContent = 'Cannot connect to server. Please make sure the backend is running.';
                 errorDiv.classList.add('show');
             } finally {
                 registerBtn.disabled = false;

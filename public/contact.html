@@ -1,474 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Safaris</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --page-bg: #f5ecdc;
-            --surface: rgba(255, 251, 243, 0.92);
-            --surface-soft: #f2dfc1;
-            --text-main: #1f2a1f;
-            --text-soft: #5d665c;
-            --accent: #a86539;
-            --accent-deep: #6a3822;
-            --forest: #486049;
-            --gold: #d7a561;
-            --border: rgba(106, 56, 34, 0.14);
-            --shadow: 0 24px 60px rgba(65, 42, 22, 0.14);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Safari</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root{
+      --bg:#f7f2ea;
+      --card:#ffffff;
+      --text:#2b241b;
+      --muted:#6d6458;
+      --accent:#c07a3f;
+      --border:#e3d3bd;
+      --danger:#b3261e;
+      --ok:#1f6b2e;
 
-        body {
-            font-family: 'Trebuchet MS', 'Gill Sans', 'Segoe UI', sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(218, 188, 138, 0.35), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(104, 133, 86, 0.16), transparent 26%),
-                linear-gradient(180deg, #f8f3ea 0%, var(--page-bg) 48%, #efe2cc 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.6;
-        }
+      --max: 980px;
+      --pad: 1.25rem;
+      --radius: 14px;
+    }
 
-        .main-content {
-            flex: 1;
-            width: 100%;
-        }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
 
-        .hero {
-            min-height: 420px;
-            background:
-                linear-gradient(rgba(33, 22, 15, 0.56), rgba(33, 22, 15, 0.62)),
-                url('assets/images/safari-background.avif') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 96px 20px 86px;
-            position: relative;
-            overflow: hidden;
-        }
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: auto 0 0;
-            height: 108px;
-            background: linear-gradient(180deg, transparent 0%, var(--page-bg) 100%);
-        }
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.6rem var(--pad) 2.4rem;
+    }
 
-        .hero div {
-            max-width: 760px;
-            position: relative;
-            z-index: 1;
-        }
+    h1{
+      margin:0 0 .5rem;
+      font-size: 1.9rem;
+      line-height: 1.15;
+      letter-spacing:-0.01em;
+    }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 18px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            font-weight: 800;
-            color: #f4ddbb;
-            background: rgba(255, 248, 236, 0.16);
-            border: 1px solid rgba(255, 244, 224, 0.18);
-        }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      max-width: 64ch;
+    }
 
-        .hero h1 {
-            color: #ffffff;
-            font-size: clamp(2.1rem, 5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: 0.16em;
-            margin-bottom: 14px;
-            text-transform: uppercase;
-            text-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-        }
+    .layout{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items:start;
+    }
 
-        .hero p {
-            color: rgba(255, 248, 236, 0.92);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            max-width: 620px;
-            margin: 0 auto;
-        }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
 
-        .section-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 72px 20px;
-        }
+    .side h2{
+      margin:0 0 .5rem;
+      font-size: 1rem;
+    }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 22px;
-        }
+    .side p{
+      margin:.25rem 0 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
 
-        .contact-card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 239, 0.9));
-            border-radius: 26px;
-            padding: 26px;
-            text-align: left;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    label{
+      display:block;
+      font-weight: 650;
+      font-size: .92rem;
+      margin: 0 0 .35rem;
+    }
 
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            inset: 0 0 auto;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 55%, var(--forest) 100%);
-        }
+    input, textarea{
+      width: 100%;
+      padding: .65rem .75rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background:#fff;
+      font: inherit;
+      color: var(--text);
+    }
 
-        .contact-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 30px 70px rgba(65, 42, 22, 0.18);
-            border-color: rgba(106, 56, 34, 0.24);
-        }
+    textarea{
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.5;
+    }
 
-        .contact-icon {
-            width: 58px;
-            height: 58px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.9rem;
-            margin-bottom: 16px;
-            border-radius: 18px;
-            background: var(--surface-soft);
-            box-shadow: inset 0 0 0 1px rgba(106, 56, 34, 0.08);
-        }
+    input:focus, textarea:focus{
+      outline: 2px solid rgba(192,122,63,.18);
+      border-color: rgba(192,122,63,.55);
+    }
 
-        .contact-title {
-            font-size: 1.2rem;
-            letter-spacing: 0.08em;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            color: var(--accent-deep);
-        }
+    .field{ margin-bottom: .9rem; }
 
-        .contact-text {
-            line-height: 1.8;
-            color: var(--text-soft);
-            font-size: 0.98rem;
-        }
+    .actions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: .75rem;
+      flex-wrap:wrap;
+      margin-top: .5rem;
+    }
 
-        .contact-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.2s ease;
-        }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:.7rem 1.1rem;
+      border: 1px solid transparent;
+      font-size:.92rem;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+    }
 
-        .contact-link:hover {
-            color: var(--accent-deep);
-            text-decoration: underline;
-        }
+    .btn.primary{
+      background: var(--accent);
+      color:#fff;
+    }
+    .btn.primary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0,0,0,.08);
+    }
 
-        .form-section {
-            background: transparent;
-            padding: 0 20px 90px;
-        }
+    .btn.ghost{
+      background:#fff;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn.ghost:hover{
+      border-color: rgba(192,122,63,.45);
+    }
 
-        .form-container {
-            max-width: 1080px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, rgba(45, 63, 48, 0.96), rgba(109, 57, 34, 0.94));
-            color: #fffaf2;
-            border-radius: 34px;
-            padding: clamp(28px, 4vw, 52px);
-            display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-            gap: 34px;
-            box-shadow: 0 32px 80px rgba(40, 27, 18, 0.22);
-            position: relative;
-            overflow: hidden;
-        }
+    .status{
+      display:none;
+      padding: .7rem .8rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      font-size: .92rem;
+    }
 
-        .form-container::before,
-        .form-container::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-        }
+    .status.show{ display:block; }
+    .status.ok{
+      background: #f1fbf3;
+      border-color: #bfe6c7;
+      color: var(--ok);
+    }
+    .status.err{
+      background: #fff3f2;
+      border-color: #f0b3ad;
+      color: var(--danger);
+    }
 
-        .form-container::before {
-            width: 220px;
-            height: 220px;
-            top: -70px;
-            right: -60px;
-        }
+    .fine{
+      color: var(--muted);
+      font-size: .86rem;
+    }
 
-        .form-container::after {
-            width: 160px;
-            height: 160px;
-            bottom: -65px;
-            left: -45px;
-        }
-
-        .form-heading {
-            align-self: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-heading h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #fff8ef;
-            margin-bottom: 12px;
-        }
-
-        .form-heading p {
-            color: rgba(255, 247, 235, 0.84);
-            font-size: 1.05rem;
-            max-width: 330px;
-            line-height: 1.8;
-        }
-
-        .form-heading .line {
-            width: 92px;
-            height: 4px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #f5cf9f 0%, #ffffff 100%);
-            margin: 20px 0 0;
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-form label {
-            font-size: 0.95rem;
-            color: #f9ecda;
-            font-weight: 700;
-            margin-bottom: -6px;
-            letter-spacing: 0.01em;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            border: 1px solid rgba(255, 245, 230, 0.18);
-            border-radius: 16px;
-            padding: 14px 16px;
-            background: rgba(255, 252, 247, 0.12);
-            color: #ffffff;
-            outline: none;
-            font-size: 1rem;
-            transition: border-color 0.24s ease, transform 0.24s ease, background-color 0.24s ease;
-        }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: rgba(255, 247, 235, 0.62);
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: #f5cf9f;
-            background: rgba(255, 252, 247, 0.18);
-            transform: translateY(-1px);
-        }
-
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 136px;
-        }
-
-        .submit-btn {
-            justify-self: start;
-            border: none;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #f1c589 0%, #dda563 100%);
-            color: #3c220f;
-            padding: 14px 26px;
-            font-size: 0.95rem;
-            letter-spacing: 0.04em;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 14px 30px rgba(241, 197, 137, 0.28);
-            transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 34px rgba(241, 197, 137, 0.34);
-            filter: brightness(1.03);
-        }
-
-        @media (max-width: 860px) {
-            .hero {
-                min-height: 360px;
-                padding: 84px 18px 76px;
-            }
-
-            .form-container {
-                grid-template-columns: 1fr;
-            }
-
-            .form-heading p {
-                max-width: none;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .section-wrap {
-                padding: 56px 16px;
-            }
-
-            .contact-card {
-                padding: 22px;
-                border-radius: 22px;
-            }
-
-            .form-section {
-                padding: 0 16px 72px;
-            }
-
-            .form-container {
-                border-radius: 24px;
-                gap: 26px;
-            }
-
-            .submit-btn {
-                width: 100%;
-                justify-self: stretch;
-            }
-        }
-    </style>
+    @media (max-width: 860px){
+      .layout{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <div id="header"></div>
+  <div id="header"></div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="hero">
-            <div>
-                <h1>Contact Us</h1>
-                <p>Get in touch</p>
-            </div>
-        </section>
+  <main>
+    <header>
+      <h1>Contact us</h1>
+      <p class="lead">
+        Got a question about a destination, timing, or budgets? Send a message.
+        If you include your dates + rough budget, we can give a much better answer.
+      </p>
+    </header>
 
-        <section class="section-wrap">
-            <div class="contact-grid">
-                <article class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <h3 class="contact-title">Phone</h3>
-                    <p class="contact-text">
-                        Reach out to our team and get a customized quote.<br>
-                        +254711100333 / +254768000111<br>
-                        +254719444000 / +254700777555
-                    </p>
-                </article>
+    <div class="layout">
+      <section class="card">
+        <div id="status" class="status"></div>
 
-                <article class="contact-card">
-                    <div class="contact-icon">✉</div>
-                    <h3 class="contact-title">Email</h3>
-                    <p class="contact-text">
-                        You can reach us through our official email addresses.<br>
-                        <a class="contact-link" href="mailto:travel@safaris.com">travel@safaris.com</a><br>
-                        CVs: <a class="contact-link" href="mailto:hr@safaris.com">hr@safaris.com</a>
-                    </p>
-                </article>
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" placeholder="e.g., Amina" required />
+          </div>
 
-                <article class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <h3 class="contact-title">Location</h3>
-                    <p class="contact-text">
-                        Along Ring Road Parklands, Ken Rail Hse, 6th Floor.<br>
-                        <a class="contact-link" href="https://www.google.com/maps/place/Kenrail+Towers/@-1.2608925,36.8017688,17z/data=!3m2!4b1!5s0x182f1773216c7825:0xb6ff7b814890666d!4m6!3m5!1s0x182f17e441790ac7:0x96af478219af41cd!8m2!3d-1.2608979!4d36.8043437!16s%2Fg%2F11fnrpzj55?entry=ttu&g_ep=EgoyMDI2MDMwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">view on google maps </a>
-                    </p>
-                </article>
-            </div>
-        </section>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
 
-        <section class="form-section">
-            <div class="section-wrap form-container">
-                <div class="form-heading">
-                    <h2>Leave Us Your Info</h2>
-                    <p>And we will get back to you.</p>
-                    <div class="line"></div>
-                </div>
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="What do you need help with?" required />
+          </div>
 
-                <form class="contact-form" id="contactForm" method="post">
-                    <label for="name">Your name</label>
-                    <input id="name" name="name" type="text" placeholder="Enter your full name" required>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us what you’re planning (destination, dates, budget)…" required></textarea>
+          </div>
 
-                    <label for="email">Your email</label>
-                    <input id="email" name="email" type="email" placeholder="Enter your email address" required>
+          <div class="actions">
+            <button class="btn primary" id="sendBtn" type="submit">Send message</button>
+            <a class="btn ghost" href="home.html">Back to home</a>
+          </div>
 
-                    <label for="subject">Subject</label>
-                    <input id="subject" name="subject" type="text" placeholder="How can we help?" required>
+          <p class="fine" style="margin:.8rem 0 0;">
+            We’ll reply by email. No spam, no weird newsletter stuff.
+          </p>
+        </form>
+      </section>
 
-                    <label for="message">Your message (optional)</label>
-                    <textarea id="message" name="message" placeholder="Tell us more about your trip plans..."></textarea>
+      <aside class="card side">
+        <h2>What to include (so we can actually help)</h2>
+        <p>• Where you’re thinking of going</p>
+        <p>• Rough dates (even “June-ish” helps)</p>
+        <p>• Your comfort level (budget / mid / treat-yourself)</p>
+        <p>• Anything you’re worried about (safety, pace, long drives, etc.)</p>
+      </aside>
+    </div>
+  </main>
 
-                    <button class="submit-btn" type="submit">Submit</button>
-                </form>
+  <div id="footer"></div>
 
-                <script>
-                    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-                        e.preventDefault();
-                        const name = document.getElementById('name').value;
-                        const email = document.getElementById('email').value;
-                        const subject = document.getElementById('subject').value;
-                        const message = document.getElementById('message').value;
-                        
-                        try {
-                            const response = await fetch('http://localhost:3000/api/contact', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ name, email, subject, message })
-                            });
-                            
-                            const data = await response.json();
-                            
-                            if (response.ok && data.success) {
-                                alert('Thank you! We have received your message and will get back to you soon.');
-                                this.reset();
-                            } else {
-                                alert('Failed to submit: ' + (data.error || 'Please try again.'));
-                            }
-                        } catch (error) {
-                            console.error('Contact error:', error);
-                            alert('Error: ' + error.message);
-                        }
-                    });
-                </script>
-            </div>
-        </section>
-    </main>
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
 
-    <!-- Footer -->
-    <div id="footer"></div>
+  <script>
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('status');
+    const sendBtn = document.getElementById('sendBtn');
 
-    <!-- Shared Components -->
-    <script src="components/header.js"></script>
-    <script src="components/footer.js"></script>
+    function showStatus(type, text) {
+      statusEl.className = 'status show ' + type;
+      statusEl.textContent = text;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      statusEl.className = 'status';
+      statusEl.textContent = '';
+
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        subject: form.subject.value.trim(),
+        message: form.message.value.trim()
+      };
+
+      if (!payload.name || !payload.email || !payload.subject || !payload.message) {
+        showStatus('err', 'Please fill in all fields.');
+        return;
+      }
+
+      const original = sendBtn.textContent;
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('http://localhost:4000/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          showStatus('err', data.message || 'Could not send your message. Try again.');
+          return;
+        }
+
+        showStatus('ok', data.message || 'Message sent. We’ll get back to you soon.');
+        form.reset();
+      } catch (err) {
+        showStatus('err', 'Network error: ' + err.message);
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = original;
+      }
+    });
+  </script>
 </body>
 </html>

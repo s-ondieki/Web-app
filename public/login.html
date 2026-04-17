@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦁Login-Safari </title>
+    <title>Safari | Welcome back</title>
     <style>
         * {
             margin: 0;
@@ -13,18 +13,20 @@
 
         :root {
             --accent: #a86539;
-            --surface: rgba(255, 255, 255, 0.7);
-            --surface-hover: rgba(255, 255, 255, 0.9);
-            --text-main: #2c2c2c;
-            --text-light: #666;
-            --border: rgba(255, 255, 255, 0.3);
-            --error: #c33;
-            --success: #28a745;
+            --accent-soft: #d48d59;
+            --surface: rgba(255, 252, 246, 0.78);
+            --text-main: #2f241c;
+            --text-light: #6f6258;
+            --border: rgba(255, 255, 255, 0.36);
+            --error: #ba3a3a;
+            --success: #247e46;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #6B4423 100%);
+            font-family: "Avenir Next", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                linear-gradient(rgba(30, 19, 13, 0.56), rgba(30, 19, 13, 0.68)),
+                url('assets/images/safari-background.avif') center/cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -35,10 +37,10 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 247, 235, 0.13);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+            padding: 1rem 1.6rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,7 +52,7 @@
             gap: 0.5rem;
             font-weight: 700;
             font-size: 1.25rem;
-            color: var(--accent);
+            color: #f7e5cc;
             text-decoration: none;
         }
 
@@ -84,18 +86,20 @@
         }
 
         .btn {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-soft));
             color: white;
             border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.68rem 1.5rem;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 0.95rem;
-            transition: all 0.3s;
+            transition: all 0.25s;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(168, 101, 57, 0.22);
         }
 
         .btn:hover {
-            background: #925430;
+            filter: brightness(1.04);
             transform: translateY(-2px);
         }
 
@@ -110,18 +114,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 2.6rem 1rem;
         }
 
         .login-container {
             background: var(--surface);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
+            border-radius: 18px 20px 14px 24px;
+            padding: 2.5rem 2.2rem 2.2rem;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 430px;
+            box-shadow: 0 18px 44px rgba(18, 11, 8, 0.26);
+            animation: entrance 0.45s ease;
         }
 
         .login-header {
@@ -130,42 +135,45 @@
         }
 
         .login-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.05rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.02em;
         }
 
         .login-header p {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.55;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text-main);
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 650;
+            font-size: 0.92rem;
         }
 
         input {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.82rem 1rem;
             border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            font-size: 0.99rem;
+            background: rgba(255, 255, 255, 0.56);
             color: var(--text-main);
-            transition: all 0.3s;
+            transition: all 0.22s;
         }
 
         input:focus {
             outline: none;
             border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 0 0 3px rgba(168, 101, 57, 0.14);
         }
 
         input::placeholder {
@@ -175,14 +183,14 @@
         .btn-login {
             width: 100%;
             padding: 0.75rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
 
         .signup-link {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1.3rem;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
 
         .signup-link a {
@@ -198,7 +206,7 @@
         .error-message {
             padding: 1rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             background: rgba(220, 53, 69, 0.15);
             color: var(--error);
             border: 1px solid rgba(220, 53, 69, 0.3);
@@ -213,7 +221,7 @@
         .success-message {
             padding: 1rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             background: rgba(40, 167, 69, 0.15);
             color: var(--success);
             border: 1px solid rgba(40, 167, 69, 0.3);
@@ -226,21 +234,32 @@
         }
 
         footer {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 250, 241, 0.08);
             border-top: 1px solid var(--border);
             padding: 2rem;
             text-align: center;
-            color: var(--text-light);
+            color: #efddc4;
             font-size: 0.9rem;
+        }
+
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 600px) {
             .login-container {
-                padding: 2rem;
+                padding: 1.9rem 1.35rem 1.5rem;
             }
 
             .login-header h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
             header {
@@ -261,18 +280,18 @@
     <header>
         <a href="home.html" class="logo">
             <div class="logo-mark">🦁</div>
-            <span>Safari </span>
+            <span>Safari</span>
         </a>
         <nav>
-            <a href="register.html">Sign Up</a>
+            <a href="register.html">New here?</a>
         </nav>
     </header>
 
     <main>
         <div class="login-container">
             <div class="login-header">
-                <h1>Welcome Back</h1>
-                <p>Login to your Safari account</p>
+                <h1>Welcome back</h1>
+                <p>Your saved plans are waiting. Sign in and pick up right where you stopped.</p>
             </div>
 
             <div id="errorMessage" class="error-message"></div>
@@ -285,7 +304,7 @@
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Enter your email"
+                        placeholder="name@example.com"
                         autocomplete="email"
                         required
                     >
@@ -297,39 +316,47 @@
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Enter your password"
+                        placeholder="Your password"
                         autocomplete="current-password"
                         required
                     >
                 </div>
             
-                <button type="submit" id="loginBtn" class="btn btn-login">Login</button>
+                <button type="submit" id="loginBtn" class="btn btn-login">Log in</button>
             </form>
 
             <div class="signup-link">
-                Don't have an account? <a href="register.html">Sign up here</a>
+                First safari with us? <a href="register.html">Create your account</a>
             </div>
         </div>
     </main>
 
-    <script>
+        <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('loginForm');        // your form id
-        const errorDiv = document.querySelector('.error-message');
-        const successDiv = document.querySelector('.success-message');
-        const loginBtn = document.getElementById('loginButton');  // your button id
+        const form = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('errorMessage');
+        const successDiv = document.getElementById('successMessage');
+        const loginBtn = document.getElementById('loginBtn');
     
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
     
+            // Ensure elements exist (avoid null errors)
+            if (!errorDiv || !successDiv || !loginBtn) {
+                console.error('Required elements not found');
+                return;
+            }
+    
             errorDiv.classList.remove('show');
             successDiv.classList.remove('show');
+            errorDiv.textContent = '';
+            successDiv.textContent = '';
     
-            const email = form.email.value.trim();     // <input name="email">
-            const password = form.password.value;      // <input name="password">
-    
+            const email = form.email.value.trim();
+            const password = form.password.value;
+
             if (!email || !password) {
-                errorDiv.textContent = 'Please fill in all fields.';
+                errorDiv.textContent = 'Please fill out all fields.';
                 errorDiv.classList.add('show');
                 return;
             }
@@ -357,6 +384,9 @@
                     if (data.token) {
                         localStorage.setItem('authToken', data.token);
                     }
+                    if (data.user) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                    }
     
                     setTimeout(() => {
                         window.location.href = 'index.html';
@@ -374,7 +404,6 @@
     });
     </script>
     <div id="footer"></div>
-
     <script src="components/footer.js"></script>
 </body>
 </html>
