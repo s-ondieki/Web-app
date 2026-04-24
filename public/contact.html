@@ -1,301 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | Safari</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Travel Safari</title>
+  <meta name="description" content="Get in touch with the Travel Safari team. We'll help you plan the right trip.">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root{
-      --bg:#f7f2ea;
-      --card:#ffffff;
-      --text:#2b241b;
-      --muted:#6d6458;
-      --accent:#c07a3f;
-      --border:#e3d3bd;
-      --danger:#b3261e;
-      --ok:#1f6b2e;
-
-      --max: 980px;
-      --pad: 1.25rem;
-      --radius: 14px;
+    .contact-hero {
+      background:
+        linear-gradient(rgba(20,13,9,0.52), rgba(20,13,9,0.62)),
+        url('assets/images/safari-background.avif') center / cover no-repeat;
+      padding: 60px 0 52px;
+      color: white;
     }
+    .contact-hero h1 { color: white; margin-bottom: 10px; }
+    .contact-hero p  { color: rgba(255,243,222,0.82); max-width: 480px; }
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
+    /* Info chips */
+    .info-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
     }
-
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    main{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1.6rem var(--pad) 2.4rem;
-    }
-
-    h1{
-      margin:0 0 .5rem;
-      font-size: 1.9rem;
-      line-height: 1.15;
-      letter-spacing:-0.01em;
-    }
-
-    .lead{
-      margin:0;
-      color: var(--muted);
-      max-width: 64ch;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 1rem;
-      margin-top: 1rem;
-      align-items:start;
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-
-    .side h2{
-      margin:0 0 .5rem;
-      font-size: 1rem;
-    }
-
-    .side p{
-      margin:.25rem 0 0;
-      color: var(--muted);
-      font-size: .93rem;
-    }
-
-    label{
-      display:block;
-      font-weight: 650;
-      font-size: .92rem;
-      margin: 0 0 .35rem;
-    }
-
-    input, textarea{
-      width: 100%;
-      padding: .65rem .75rem;
+    .info-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,248,238,0.1);
+      border: 1px solid rgba(255,240,210,0.15);
       border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 0.875rem;
+      color: rgba(255,240,215,0.85);
+    }
+    .info-chip span { font-size: 1rem; }
+
+    /* Body grid */
+    .contact-body {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 40px;
+      margin-top: 52px;
+    }
+
+    /* Left side */
+    .contact-info h2 { margin-bottom: 16px; }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-item:first-of-type { padding-top: 0; }
+    .contact-item:last-of-type  { border-bottom: none; }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item h4 {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      margin-bottom: 4px;
+    }
+    .contact-item p {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .contact-item a { color: var(--accent); font-weight: 500; text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    .office-hours {
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      background:#fff;
-      font: inherit;
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-top: 28px;
+    }
+    .office-hours h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      margin-bottom: 10px;
+    }
+    .office-hours p { font-size: 0.875rem; color: var(--text-soft); margin: 0; }
+
+    /* Right side — form */
+    .contact-form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .contact-form-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
       color: var(--text);
     }
-
-    textarea{
-      min-height: 140px;
-      resize: vertical;
-      line-height: 1.5;
+    .contact-form-card > p {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin-bottom: 24px;
     }
 
-    input:focus, textarea:focus{
-      outline: 2px solid rgba(192,122,63,.18);
-      border-color: rgba(192,122,63,.55);
-    }
-
-    .field{ margin-bottom: .9rem; }
-
-    .actions{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: .75rem;
-      flex-wrap:wrap;
-      margin-top: .5rem;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      padding:.7rem 1.1rem;
-      border: 1px solid transparent;
-      font-size:.92rem;
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-    }
-
-    .btn.primary{
-      background: var(--accent);
-      color:#fff;
-    }
-    .btn.primary:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(0,0,0,.08);
-    }
-
-    .btn.ghost{
-      background:#fff;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .btn.ghost:hover{
-      border-color: rgba(192,122,63,.45);
-    }
-
-    .status{
-      display:none;
-      padding: .7rem .8rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-bottom: 1rem;
-      font-size: .92rem;
-    }
-
-    .status.show{ display:block; }
-    .status.ok{
-      background: #f1fbf3;
-      border-color: #bfe6c7;
-      color: var(--ok);
-    }
-    .status.err{
-      background: #fff3f2;
-      border-color: #f0b3ad;
-      color: var(--danger);
-    }
-
-    .fine{
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    @media (max-width: 860px){
-      .layout{ grid-template-columns: 1fr; }
+    @media (max-width: 860px) {
+      .contact-body { grid-template-columns: 1fr; gap: 32px; }
     }
   </style>
 </head>
-
 <body>
   <div id="header"></div>
 
-  <main>
-    <header>
-      <h1>Contact us</h1>
-      <p class="lead">
-        Got a question about a destination, timing, or budgets? Send a message.
-        If you include your dates + rough budget, we can give a much better answer.
-      </p>
-    </header>
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Let's talk.</h1>
+      <p>Whether you're just curious or ready to book — our team is happy to help. We know this stuff inside out.</p>
+      <div class="info-chips">
+        <div class="info-chip"><span>📞</span> +254 711 100 333</div>
+        <div class="info-chip"><span>✉️</span> travel@safaris.com</div>
+        <div class="info-chip"><span>📍</span> Kenrail Towers, Nairobi</div>
+      </div>
+    </div>
+  </section>
 
-    <div class="layout">
-      <section class="card">
-        <div id="status" class="status"></div>
+  <main class="main">
+    <div class="container">
+      <div class="contact-body">
 
-        <form id="contactForm" novalidate>
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" placeholder="e.g., Amina" required />
+        <!-- Left: Contact details -->
+        <div class="contact-info">
+          <h2>How to reach us</h2>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <p>
+                +254 711 100 333 &nbsp;·&nbsp; +254 768 000 111<br>
+                +254 719 444 000 &nbsp;·&nbsp; +254 700 777 555<br>
+                Call or WhatsApp — we're pretty responsive.
+              </p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <p>
+                General: <a href="mailto:travel@safaris.com">travel@safaris.com</a><br>
+                Recruitment: <a href="mailto:hr@safaris.com">hr@safaris.com</a>
+              </p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="What do you need help with?" required />
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Office</h4>
+              <p>
+                Along Ring Road Parklands,<br>
+                Kenrail House, 6th Floor, Nairobi.<br>
+                <a href="https://www.google.com/maps/place/Kenrail+Towers" target="_blank" rel="noopener">View on Google Maps →</a>
+              </p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us what you’re planning (destination, dates, budget)…" required></textarea>
+          <div class="office-hours">
+            <h4>Office hours</h4>
+            <p>Monday – Friday, 8 am – 6 pm EAT<br>Saturday, 9 am – 1 pm &nbsp;·&nbsp; Closed Sunday</p>
           </div>
+        </div>
 
-          <div class="actions">
-            <button class="btn primary" id="sendBtn" type="submit">Send message</button>
-            <a class="btn ghost" href="home.html">Back to home</a>
-          </div>
+        <!-- Right: Contact form -->
+        <div class="contact-form-card">
+          <h3>Send us a message</h3>
+          <p>We'll get back to you within one business day, usually sooner.</p>
 
-          <p class="fine" style="margin:.8rem 0 0;">
-            We’ll reply by email. No spam, no weird newsletter stuff.
-          </p>
-        </form>
-      </section>
+          <div id="formError"   class="alert alert-error"></div>
+          <div id="formSuccess" class="alert alert-success"></div>
 
-      <aside class="card side">
-        <h2>What to include (so we can actually help)</h2>
-        <p>• Where you’re thinking of going</p>
-        <p>• Rough dates (even “June-ish” helps)</p>
-        <p>• Your comfort level (budget / mid / treat-yourself)</p>
-        <p>• Anything you’re worried about (safety, pace, long drives, etc.)</p>
-      </aside>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g. Booking inquiry for Kenya — July 2026" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Your message <span style="color:var(--text-lighter); font-weight:400;">(optional)</span></label>
+              <textarea id="message" name="message" class="form-control" placeholder="Tell us a bit about your trip plans, group size, dates — anything helps us get back to you faster."></textarea>
+            </div>
+            <button type="submit" id="submitBtn" class="btn btn-primary btn-full">Send message</button>
+          </form>
+        </div>
+
+      </div>
     </div>
   </main>
 
   <div id="footer"></div>
-
   <script src="components/header.js"></script>
   <script src="components/footer.js"></script>
-
   <script>
-    const form = document.getElementById('contactForm');
-    const statusEl = document.getElementById('status');
-    const sendBtn = document.getElementById('sendBtn');
-
-    function showStatus(type, text) {
-      statusEl.className = 'status show ' + type;
-      statusEl.textContent = text;
-    }
-
-    form.addEventListener('submit', async (e) => {
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      const errorDiv   = document.getElementById('formError');
+      const successDiv = document.getElementById('formSuccess');
+      const btn        = document.getElementById('submitBtn');
 
-      statusEl.className = 'status';
-      statusEl.textContent = '';
+      errorDiv.classList.remove('show');
+      successDiv.classList.remove('show');
 
-      const payload = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        subject: form.subject.value.trim(),
-        message: form.message.value.trim()
-      };
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim() || '(no message provided)';
 
-      if (!payload.name || !payload.email || !payload.subject || !payload.message) {
-        showStatus('err', 'Please fill in all fields.');
+      if (!name || !email || !subject) {
+        errorDiv.textContent = 'Please fill in your name, email, and subject.';
+        errorDiv.classList.add('show');
         return;
       }
 
-      const original = sendBtn.textContent;
-      sendBtn.disabled = true;
-      sendBtn.textContent = 'Sending…';
+      const orig = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
 
       try {
-        const res = await fetch('http://localhost:4000/api/contact', {
+        const res  = await fetch('http://localhost:4000/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ name, email, subject, message })
         });
+        const data = await res.json();
 
-        const data = await res.json().catch(() => ({}));
-
-        if (!res.ok) {
-          showStatus('err', data.message || 'Could not send your message. Try again.');
-          return;
+        if (res.ok) {
+          successDiv.textContent = data.message || 'Message sent! We\'ll be in touch soon.';
+          successDiv.classList.add('show');
+          this.reset();
+        } else {
+          errorDiv.textContent = data.message || 'Something went wrong. Try again.';
+          errorDiv.classList.add('show');
         }
-
-        showStatus('ok', data.message || 'Message sent. We’ll get back to you soon.');
-        form.reset();
       } catch (err) {
-        showStatus('err', 'Network error: ' + err.message);
+        errorDiv.textContent = 'Can\'t reach the server right now. Try again shortly.';
+        errorDiv.classList.add('show');
       } finally {
-        sendBtn.disabled = false;
-        sendBtn.textContent = original;
+        btn.disabled = false;
+        btn.textContent = orig;
       }
+    });
+
+    // Pre-fill from URL params (e.g. from matches.html) and localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      // URL params
+      const params = new URLSearchParams(window.location.search);
+      const subjectParam = params.get('subject');
+      if (subjectParam) {
+        document.getElementById('subject').value = subjectParam;
+      }
+
+      // Auto-fill from logged-in user
+      try {
+        const raw  = localStorage.getItem('user');
+        const user = raw ? JSON.parse(raw) : null;
+        if (user) {
+          const nameField  = document.getElementById('name');
+          const emailField = document.getElementById('email');
+          if (nameField  && !nameField.value)  nameField.value  = user.fullName || user.full_name || '';
+          if (emailField && !emailField.value) emailField.value = user.email || '';
+        }
+      } catch(e) {}
     });
   </script>
 </body>

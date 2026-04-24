@@ -211,6 +211,48 @@ app.get('/api/budget', auth, (req, res) => {
   });
 });
 
+// ------------------------------------------------
+// MATCH FINDER
+// ------------------------------------------------
+
+// Protected: searches and excludes the logged-in user from results
+app.get('/api/matches', auth, (req, res) => {
+  const destination = (req.query.destination || '').trim();
+  const travelDate  = req.query.travel_date  || null;
+  const returnDate  = req.query.return_date  || null;
+
+  if (!destination) {
+    return res.status(400).json({ message: 'Please enter a destination to search.' });
+  }
+
+  db.findMatches(destination, travelDate, returnDate, req.user.id, (err, matches) => {
+    if (err) {
+      console.error('DB error:', err);
+      return res.status(500).json({ message: 'Search failed. Try again.' });
+    }
+    res.json({ matches, count: matches.length, destination });
+  });
+});
+
+// Public: same search but no auth required — anyone can browse
+app.get('/api/matches/public', (req, res) => {
+  const destination = (req.query.destination || '').trim();
+  const travelDate  = req.query.travel_date  || null;
+  const returnDate  = req.query.return_date  || null;
+
+  if (!destination) {
+    return res.status(400).json({ message: 'Please enter a destination to search.' });
+  }
+
+  db.findMatches(destination, travelDate, returnDate, 0, (err, matches) => {
+    if (err) {
+      console.error('DB error:', err);
+      return res.status(500).json({ message: 'Search failed. Try again.' });
+    }
+    res.json({ matches, count: matches.length, destination });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`API server running on http://localhost:${PORT}`);
-});
+});

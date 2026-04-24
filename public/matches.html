@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Travel Matches — Travel Safari</title>
+  <meta name="description" content="Find other travellers heading to the same destination at the same time. Connect, share costs, and travel together.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- Hero ---- */
+    .matches-hero {
+      background:
+        linear-gradient(rgba(20,13,9,0.52), rgba(20,13,9,0.60)),
+        url('assets/images/safari-background.avif') center / cover no-repeat;
+      padding: 60px 0 52px;
+      color: white;
+    }
+    .matches-hero h1 { color: white; margin-bottom: 10px; }
+    .matches-hero p  { color: rgba(255,243,222,0.82); max-width: 540px; }
+
+    /* ---- Search card ---- */
+    .search-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-top: -32px;  /* Pull up over hero */
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .search-card > p {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 180px 180px auto;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .search-row .form-group { margin-bottom: 0; }
+
+    /* Destination suggestions */
+    .dest-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .dest-chip {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .dest-chip:hover,
+    .dest-chip.active {
+      background: var(--accent-light);
+      border-color: rgba(184,92,40,0.3);
+      color: var(--accent-dark);
+    }
+
+    /* ---- Results area ---- */
+    .results-area {
+      margin-top: 36px;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .results-count {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+    }
+    .results-count strong { color: var(--text); font-weight: 600; }
+
+    /* Empty / loading states */
+    .state-box {
+      text-align: center;
+      padding: 60px 24px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface-2);
+    }
+    .state-box .state-icon { font-size: 2.5rem; margin-bottom: 14px; }
+    .state-box h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .state-box p  { font-size: 0.875rem; color: var(--text-soft); max-width: 340px; margin: 0 auto; }
+
+    /* ---- Match cards ---- */
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .match-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .match-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--forest));
+    }
+    .match-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .match-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent-light), #fce9d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-family: var(--font-display);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .match-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .match-dest {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--accent-dark);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .match-dates {
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+    .match-dates-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+    .match-dates-row:last-child { margin-bottom: 0; }
+    .match-dates-row strong { color: var(--text); font-weight: 600; }
+
+    .match-overlap {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+    }
+    .match-overlap.yes {
+      background: var(--forest-light);
+      color: var(--forest);
+    }
+    .match-overlap.maybe {
+      background: #fef9ee;
+      color: #854d0e;
+      border: 1px solid #fde68a;
+    }
+
+    .match-connect-btn {
+      width: 100%;
+      margin-top: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 9px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--font);
+    }
+    .match-connect-btn:hover {
+      background: var(--accent-light);
+      border-color: rgba(184,92,40,0.3);
+      color: var(--accent-dark);
+    }
+
+    /* ---- How it works ---- */
+    .how-it-works {
+      margin-top: 60px;
+      padding: 40px 36px;
+      background: linear-gradient(135deg, var(--accent-light), #fde9d4);
+      border: 1px solid rgba(184,92,40,0.12);
+      border-radius: var(--radius-xl);
+    }
+    .how-it-works h2 { font-size: 1.3rem; margin-bottom: 24px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .step { text-align: center; }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .step h4 { font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .step p  { font-size: 0.8rem; color: var(--text-soft); margin: 0; }
+
+    /* ---- Auth banner (for non-logged-in users) ---- */
+    .auth-banner {
+      background: var(--forest-light);
+      border: 1px solid rgba(58,90,62,0.2);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      display: none;
+    }
+    .auth-banner p { font-size: 0.875rem; color: var(--forest); margin: 0; font-weight: 500; }
+    .auth-banner a { font-weight: 700; color: var(--forest); text-decoration: underline; }
+
+    @media (max-width: 800px) {
+      .search-row  { grid-template-columns: 1fr 1fr; }
+      .search-row .btn { grid-column: span 2; }
+      .steps-grid  { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .how-it-works { padding: 28px 20px; }
+    }
+    @media (max-width: 520px) {
+      .search-card { padding: 22px; margin-top: 0; border-radius: var(--radius-lg); }
+      .search-row  { grid-template-columns: 1fr; }
+      .search-row .btn { grid-column: span 1; }
+      .steps-grid  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <!-- Hero -->
+  <section class="matches-hero">
+    <div class="container">
+      <h1>Find your travel companions.</h1>
+      <p>Heading to Maasai Mara in June? You might not be the only one. Search for other travellers going to the same destination — share a vehicle, split costs, or just know you won't be alone.</p>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- Search card -->
+      <div class="search-card anim-fade-up">
+        <h2>Search for travel matches</h2>
+        <p>Enter a destination and optional travel dates — we'll find everyone else planning the same trip.</p>
+
+        <!-- Auth note for guests -->
+        <div class="auth-banner" id="authBanner">
+          <p>🔒 <a href="login.html">Log in</a> to exclude yourself from results and connect with others directly.</p>
+          <a href="login.html" class="btn btn-forest btn-sm">Log in</a>
+        </div>
+
+        <div class="search-row">
+          <div class="form-group">
+            <label for="searchDest">Destination <span style="color:var(--accent)">*</span></label>
+            <input type="text" id="searchDest" class="form-control"
+                   placeholder="e.g. Maasai Mara, Serengeti, Kilimanjaro…"
+                   autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="searchFrom">From date</label>
+            <input type="date" id="searchFrom" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="searchTo">To date</label>
+            <input type="date" id="searchTo" class="form-control">
+          </div>
+          <div class="form-group">
+            <label style="visibility:hidden">Search</label>
+            <button type="button" id="searchBtn" class="btn btn-primary btn-full" style="height:42px">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick destination chips -->
+        <div class="dest-suggestions">
+          <span class="text-xs text-muted" style="padding:5px 0; align-self:center;">Popular:</span>
+          <div class="dest-chip" data-dest="Maasai Mara">🇰🇪 Maasai Mara</div>
+          <div class="dest-chip" data-dest="Serengeti">🇹🇿 Serengeti</div>
+          <div class="dest-chip" data-dest="Volcanoes">🇷🇼 Volcanoes NP</div>
+          <div class="dest-chip" data-dest="Okavango">🇧🇼 Okavango</div>
+          <div class="dest-chip" data-dest="Kilimanjaro">🇹🇿 Kilimanjaro</div>
+          <div class="dest-chip" data-dest="Bwindi">🇺🇬 Bwindi</div>
+          <div class="dest-chip" data-dest="Kruger">🇿🇦 Kruger</div>
+        </div>
+      </div>
+
+      <!-- Results area -->
+      <div class="results-area" id="resultsArea">
+        <!-- Initial state -->
+        <div class="state-box" id="emptyState">
+          <div class="state-icon">🔍</div>
+          <h3>Start by searching a destination</h3>
+          <p>Type a place above — country, park, or city — and we'll find other travellers headed the same way.</p>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <h2>How travel matching works</h2>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h4>Save your trip plan</h4>
+            <p>Fill in your destination and travel dates on the <a href="plan.html">Plan page</a>. This is what others will match against.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h4>Search by destination</h4>
+            <p>Enter a destination here — partial names work too. Filter by dates for better overlap.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h4>See who's going</h4>
+            <p>Browse other travellers with similar plans. Dates overlap? That's a strong match.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <h4>Reach out</h4>
+            <p>Use the Contact page to get in touch with us — we can help connect you with your matches.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
+  <script>
+    const API = 'http://localhost:4000';
+
+    // ---- Auth state ----
+    function getToken() { return localStorage.getItem('authToken'); }
+    const isLoggedIn = !!getToken();
+
+    if (!isLoggedIn) {
+      document.getElementById('authBanner').style.display = 'flex';
+    }
+
+    // ---- Destination chips ----
+    document.querySelectorAll('.dest-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.dest-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('searchDest').value = this.dataset.dest;
+      });
+    });
+
+    // ---- Format date ----
+    function fmtDate(str) {
+      if (!str) return '—';
+      const d = new Date(str + 'T00:00:00');
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    // ---- Initials avatar ----
+    function initials(name) {
+      return (name || '?').split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase();
+    }
+
+    // ---- Date overlap check ----
+    function hasOverlap(matchFrom, matchTo, searchFrom, searchTo) {
+      if (!searchFrom) return null;
+      const mF = new Date(matchFrom), mT = new Date(matchTo);
+      const sF = new Date(searchFrom), sT = searchTo ? new Date(searchTo) : null;
+      if (sT) {
+        return mF <= sT && mT >= sF;
+      }
+      return mT >= sF;
+    }
+
+    // ---- Render results ----
+    function renderResults(matches, destination, searchFrom, searchTo) {
+      const area = document.getElementById('resultsArea');
+
+      if (matches.length === 0) {
+        area.innerHTML = `
+          <div class="state-box">
+            <div class="state-icon">😶</div>
+            <h3>No matches found for "${destination}"</h3>
+            <p>Nobody has saved a trip to that destination yet. Once you — or others — <a href="plan.html">save a travel plan</a>, they'll show up here.</p>
+          </div>`;
+        return;
+      }
+
+      const cards = matches.map(function(m) {
+        const overlap  = hasOverlap(m.travel_date, m.return_date, searchFrom, searchTo);
+        const overlapBadge = overlap === true
+          ? '<span class="match-overlap yes">✓ Dates overlap</span>'
+          : overlap === false
+          ? ''
+          : '<span class="match-overlap maybe">📅 Check dates</span>';
+
+        return `
+          <div class="match-card">
+            <div class="match-avatar">${initials(m.full_name)}</div>
+            <div class="match-name">${m.full_name}</div>
+            <div class="match-dest">📍 ${m.destination}</div>
+            <div class="match-dates">
+              <div class="match-dates-row">
+                <span>Travelling</span>
+                <strong>${fmtDate(m.travel_date)}</strong>
+              </div>
+              <div class="match-dates-row">
+                <span>Returning</span>
+                <strong>${fmtDate(m.return_date)}</strong>
+              </div>
+            </div>
+            ${overlapBadge}
+            <button class="match-connect-btn" onclick="contactMatch('${m.full_name.replace(/'/g,"\\'")}', '${m.destination.replace(/'/g,"\\'")}')">
+              ✉ Enquire about this match
+            </button>
+          </div>`;
+      }).join('');
+
+      area.innerHTML = `
+        <div class="results-header">
+          <div class="results-count">
+            Found <strong>${matches.length}</strong> traveller${matches.length !== 1 ? 's' : ''} heading to <strong>${destination}</strong>
+            ${searchFrom ? '· between your selected dates' : ''}
+          </div>
+        </div>
+        <div class="matches-grid">${cards}</div>`;
+    }
+
+    // ---- Connect handler ----
+    window.contactMatch = function(name, dest) {
+      const url = 'contact.html?subject=' + encodeURIComponent('Travel match — ' + dest + ' with ' + name);
+      window.location.href = url;
+    };
+
+    // ---- Search ----
+    async function doSearch() {
+      const destination = document.getElementById('searchDest').value.trim();
+      const travelDate  = document.getElementById('searchFrom').value || '';
+      const returnDate  = document.getElementById('searchTo').value   || '';
+
+      if (!destination) {
+        document.getElementById('searchDest').focus();
+        document.getElementById('searchDest').style.borderColor = '#ef4444';
+        setTimeout(() => document.getElementById('searchDest').style.borderColor = '', 2000);
+        return;
+      }
+
+      const btn = document.getElementById('searchBtn');
+      const orig = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Searching…';
+
+      // Show loading
+      document.getElementById('resultsArea').innerHTML = `
+        <div class="state-box">
+          <div class="state-icon" style="animation: spin 1s linear infinite; display:inline-block">🔍</div>
+          <h3>Searching…</h3>
+          <p>Looking for travellers heading to ${destination}</p>
+        </div>`;
+
+      try {
+        // Use logged-in endpoint if possible (excludes self), else public
+        let url;
+        const token = getToken();
+        let headers = { 'Content-Type': 'application/json' };
+
+        if (token) {
+          url = `${API}/api/matches?destination=${encodeURIComponent(destination)}`;
+          headers['Authorization'] = 'Bearer ' + token;
+        } else {
+          url = `${API}/api/matches/public?destination=${encodeURIComponent(destination)}`;
+        }
+
+        if (travelDate) url += `&travel_date=${encodeURIComponent(travelDate)}`;
+        if (returnDate)  url += `&return_date=${encodeURIComponent(returnDate)}`;
+
+        const res  = await fetch(url, { headers });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.message || 'Search failed');
+
+        renderResults(data.matches, destination, travelDate, returnDate);
+
+      } catch (err) {
+        document.getElementById('resultsArea').innerHTML = `
+          <div class="state-box">
+            <div class="state-icon">⚠️</div>
+            <h3>Search failed</h3>
+            <p>${err.message || 'Can\'t reach the server. Make sure the backend is running.'}</p>
+          </div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = orig;
+      }
+    }
+
+    // ---- Event listeners ----
+    document.getElementById('searchBtn').addEventListener('click', doSearch);
+
+    document.getElementById('searchDest').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSearch();
+    });
+
+    // Pre-fill from URL params (e.g. coming from plan.html)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const dest = params.get('destination');
+      if (dest) {
+        document.getElementById('searchDest').value = dest;
+        doSearch();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -260,7 +260,61 @@ const database = {
         created_at: new Date().toISOString()
       });
     });
+  },
+
+  // ---------------- MATCH FINDER ----------------
+
+  /**
+   * Find travellers going to the same (or similar) destination.
+   * - destination: required keyword, case-insensitive LIKE match
+   * - travelDate / returnDate: optional — when provided, only returns plans
+   *   whose travel window overlaps with the search window
+   * - excludeUserId: the current user — don't show themselves
+   */
+  findMatches: (destination, travelDate, returnDate, excludeUserId, callback) => {
+    let query = `
+      SELECT
+        tp.id,
+        tp.full_name,
+        tp.destination,
+        tp.travel_date,
+        tp.return_date,
+        u.id   AS user_id
+      FROM travel_plans tp
+      JOIN users u ON u.id = tp.user_id
+      WHERE tp.destination LIKE ?
+        AND tp.user_id != ?
+    `;
+
+    const params = ['%' + destination + '%', excludeUserId || 0];
+
+    // Date overlap filter: plans that overlap [travelDate, returnDate]
+    // Overlap condition: plan.travel_date <= searchReturnDate
+    //                AND plan.return_date >= searchTravelDate
+    if (travelDate && returnDate) {
+      query += ` AND tp.travel_date <= ? AND tp.return_date >= ?`;
+      params.push(returnDate, travelDate);
+    } else if (travelDate) {
+      // At least travelling on or after search travel date
+      query += ` AND tp.return_date >= ?`;
+      params.push(travelDate);
+    }
+
+    query += ` ORDER BY tp.travel_date ASC LIMIT 50`;
+
+    db.all(query, params, (err, rows) => {
+      if (err) return callback(err);
+      // Strip any potentially sensitive fields before returning
+      const safe = (rows || []).map(r => ({
+        id:           r.id,
+        full_name:    r.full_name,
+        destination:  r.destination,
+        travel_date:  r.travel_date,
+        return_date:  r.return_date,
+      }));
+      callback(null, safe);
+    });
   }
 };
 
-module.exports = database;
+module.exports = database;

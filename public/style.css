@@ -1,0 +1,207 @@
+/* =============================================
+   Travel Safari — Shared Design System
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+
+:root {
+  --bg:            #fafaf8;
+  --surface:       #ffffff;
+  --surface-2:     #f5f0e9;
+  --surface-3:     #ede6da;
+  --text:          #1c1a18;
+  --text-soft:     #6b6560;
+  --text-lighter:  #aaa49e;
+  --accent:        #b85c28;
+  --accent-dark:   #924519;
+  --accent-light:  #f5e8dc;
+  --forest:        #3a5a3e;
+  --forest-light:  #e4ede5;
+  --border:        #e4ddd5;
+  --border-mid:    #d0c8be;
+  --radius-sm:     6px;
+  --radius:        10px;
+  --radius-md:     14px;
+  --radius-lg:     20px;
+  --radius-xl:     28px;
+  --shadow-xs:     0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:     0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow:        0 4px 18px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-lg:     0 10px 36px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+  --font:          'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:  'Lora', Georgia, serif;
+  --ease:          0.2s ease;
+  --ease-slow:     0.35s ease;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+button, input, textarea, select { font: inherit; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Typography ---- */
+h1, h2 { font-family: var(--font-display); line-height: 1.2; color: var(--text); }
+h1 { font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 700; }
+h2 { font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+p  { color: var(--text-soft); line-height: 1.75; }
+a  { color: var(--accent); text-decoration: none; transition: color var(--ease); }
+a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+/* ---- Layout ---- */
+.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.main { flex: 1; padding: 48px 0 80px; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--ease);
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-primary  { background: var(--accent); color: #fff; }
+.btn-primary:hover  { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(184,92,40,0.32); color: #fff; text-decoration: none; }
+.btn-secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn-secondary:hover { background: var(--accent-light); text-decoration: none; color: var(--accent-dark); }
+.btn-ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--surface-3); text-decoration: none; }
+.btn-forest { background: var(--forest); color: #fff; }
+.btn-forest:hover { background: #2e4831; transform: translateY(-1px); color: #fff; text-decoration: none; }
+.btn-lg { padding: 13px 28px; font-size: 0.975rem; }
+.btn-sm { padding: 7px 14px; font-size: 0.82rem; }
+.btn-full { width: 100%; }
+.btn:disabled { opacity: 0.5; pointer-events: none; }
+
+/* ---- Form controls ---- */
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.form-control {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.925rem;
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color var(--ease), box-shadow var(--ease);
+  appearance: none;
+}
+.form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,92,40,0.12); }
+.form-control::placeholder { color: var(--text-lighter); }
+textarea.form-control { resize: vertical; min-height: 120px; }
+.two-col-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+
+/* ---- Alerts ---- */
+.alert { padding: 12px 16px; border-radius: var(--radius); font-size: 0.875rem; font-weight: 500; margin-bottom: 20px; display: none; }
+.alert.show { display: block; }
+.alert-error   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+.alert-success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+
+/* ---- Cards ---- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+.card-lift { transition: transform var(--ease-slow), box-shadow var(--ease-slow); }
+.card-lift:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+/* ---- Badges ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.badge-warm   { background: var(--accent-light); color: var(--accent-dark); }
+.badge-forest { background: var(--forest-light); color: var(--forest); }
+.badge-neutral { background: var(--surface-2); color: var(--text-soft); }
+
+/* ---- Dividers ---- */
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* ---- Grids ---- */
+.grid-2    { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+
+/* ---- Helpers ---- */
+.text-accent  { color: var(--accent) !important; }
+.text-forest  { color: var(--forest) !important; }
+.text-muted   { color: var(--text-soft) !important; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.8rem; }
+.font-display { font-family: var(--font-display); }
+.uppercase { text-transform: uppercase; }
+.tracking { letter-spacing: 0.08em; }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mb-8  { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+
+/* ---- Page hero banner ---- */
+.page-hero {
+  background:
+    linear-gradient(rgba(20,13,9,0.52), rgba(20,13,9,0.60)),
+    url('assets/images/safari-background.avif') center/cover no-repeat;
+  padding: 64px 0 52px;
+  margin-bottom: 48px;
+  color: white;
+}
+.page-hero h1 { color: white; margin-bottom: 12px; letter-spacing: -0.01em; }
+.page-hero p  { color: rgba(255,245,235,0.85); max-width: 560px; }
+
+/* ---- Animations ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.anim-fade-up { animation: fadeUp 0.5s ease forwards; }
+
+/* ---- Responsive ---- */
+@media (max-width: 820px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .two-col-form    { grid-template-columns: 1fr; }
+  .page-hero       { padding: 44px 0 36px; }
+  .main            { padding: 32px 0 60px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .card      { padding: 20px; }
+  h1         { font-size: 1.75rem; }
+}
