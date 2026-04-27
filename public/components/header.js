@@ -53,16 +53,16 @@
         margin-right: 36px;
       }
       .ts-logo-mark {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        background: linear-gradient(135deg, #c07030, #8a4819);
-        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1rem;
         flex-shrink: 0;
+      }
+      .ts-logo-mark img {
+        width: 65px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: contain;
       }
       .ts-logo-name {
         font-size: 0.95rem;
@@ -200,7 +200,7 @@
       <header class="ts-header" role="banner">
         <div class="ts-header-inner">
           <a href="home.html" class="ts-logo" aria-label="Travel Safari home">
-            <span class="ts-logo-mark">🦁</span>
+            <span class="ts-logo-mark"><img src="assets/images/logo.png" alt="Travel Safari Logo"></span>
             <span class="ts-logo-name">Travel Safari</span>
           </a>
           <nav class="ts-nav" id="tsNav" aria-label="Main navigation">

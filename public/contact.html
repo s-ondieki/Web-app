@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,21 @@
   <style>
     .contact-hero {
       background:
-        linear-gradient(rgba(20,13,9,0.52), rgba(20,13,9,0.62)),
+        linear-gradient(rgba(20, 13, 9, 0.52), rgba(20, 13, 9, 0.62)),
         url('assets/images/safari-background.avif') center / cover no-repeat;
       padding: 60px 0 52px;
       color: white;
     }
-    .contact-hero h1 { color: white; margin-bottom: 10px; }
-    .contact-hero p  { color: rgba(255,243,222,0.82); max-width: 480px; }
+
+    .contact-hero h1 {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .contact-hero p {
+      color: rgba(255, 243, 222, 0.82);
+      max-width: 480px;
+    }
 
     /* Info chips */
     .info-chips {
@@ -24,18 +33,22 @@
       gap: 12px;
       margin-top: 24px;
     }
+
     .info-chip {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255,248,238,0.1);
-      border: 1px solid rgba(255,240,210,0.15);
+      background: rgba(255, 248, 238, 0.1);
+      border: 1px solid rgba(255, 240, 210, 0.15);
       border-radius: 12px;
       padding: 10px 16px;
       font-size: 0.875rem;
-      color: rgba(255,240,215,0.85);
+      color: rgba(255, 240, 215, 0.85);
     }
-    .info-chip span { font-size: 1rem; }
+
+    .info-chip span {
+      font-size: 1rem;
+    }
 
     /* Body grid */
     .contact-body {
@@ -46,7 +59,9 @@
     }
 
     /* Left side */
-    .contact-info h2 { margin-bottom: 16px; }
+    .contact-info h2 {
+      margin-bottom: 16px;
+    }
 
     .contact-item {
       display: flex;
@@ -55,8 +70,14 @@
       padding: 18px 0;
       border-bottom: 1px solid var(--border);
     }
-    .contact-item:first-of-type { padding-top: 0; }
-    .contact-item:last-of-type  { border-bottom: none; }
+
+    .contact-item:first-of-type {
+      padding-top: 0;
+    }
+
+    .contact-item:last-of-type {
+      border-bottom: none;
+    }
 
     .contact-icon {
       width: 44px;
@@ -69,6 +90,7 @@
       font-size: 1.1rem;
       flex-shrink: 0;
     }
+
     .contact-item h4 {
       font-size: 0.82rem;
       font-weight: 600;
@@ -77,14 +99,23 @@
       color: var(--text-lighter);
       margin-bottom: 4px;
     }
+
     .contact-item p {
       font-size: 0.9rem;
       color: var(--text-soft);
       margin: 0;
       line-height: 1.6;
     }
-    .contact-item a { color: var(--accent); font-weight: 500; text-decoration: none; }
-    .contact-item a:hover { text-decoration: underline; }
+
+    .contact-item a {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
 
     .office-hours {
       background: var(--surface-2);
@@ -93,6 +124,7 @@
       padding: 20px 22px;
       margin-top: 28px;
     }
+
     .office-hours h4 {
       font-size: 0.8rem;
       font-weight: 600;
@@ -101,7 +133,12 @@
       color: var(--text-lighter);
       margin-bottom: 10px;
     }
-    .office-hours p { font-size: 0.875rem; color: var(--text-soft); margin: 0; }
+
+    .office-hours p {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin: 0;
+    }
 
     /* Right side — form */
     .contact-form-card {
@@ -111,23 +148,29 @@
       padding: 32px;
       box-shadow: var(--shadow);
     }
+
     .contact-form-card h3 {
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 4px;
       color: var(--text);
     }
-    .contact-form-card > p {
+
+    .contact-form-card>p {
       font-size: 0.875rem;
       color: var(--text-soft);
       margin-bottom: 24px;
     }
 
     @media (max-width: 860px) {
-      .contact-body { grid-template-columns: 1fr; gap: 32px; }
+      .contact-body {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
     }
   </style>
 </head>
+
 <body>
   <div id="header"></div>
 
@@ -181,7 +224,8 @@
               <p>
                 Along Ring Road Parklands,<br>
                 Kenrail House, 6th Floor, Nairobi.<br>
-                <a href="https://www.google.com/maps/place/Kenrail+Towers" target="_blank" rel="noopener">View on Google Maps →</a>
+                <a href="https://www.google.com/maps/place/Kenrail+Towers" target="_blank" rel="noopener">View on Google
+                  Maps →</a>
               </p>
             </div>
           </div>
@@ -197,25 +241,28 @@
           <h3>Send us a message</h3>
           <p>We'll get back to you within one business day, usually sooner.</p>
 
-          <div id="formError"   class="alert alert-error"></div>
+          <div id="formError" class="alert alert-error"></div>
           <div id="formSuccess" class="alert alert-success"></div>
 
           <form id="contactForm" novalidate>
             <div class="form-group">
               <label for="name">Your name</label>
-              <input type="text" id="name" name="name" class="form-control" placeholder="Jane Doe" required>
+              <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
             </div>
             <div class="form-group">
               <label for="email">Email address</label>
-              <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required>
+              <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
             </div>
             <div class="form-group">
               <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g. Booking inquiry for Kenya — July 2026" required>
+              <input type="text" id="subject" name="subject" class="form-control"
+                placeholder="e.g. Booking inquiry for Kenya — July 2026" required>
             </div>
             <div class="form-group">
-              <label for="message">Your message <span style="color:var(--text-lighter); font-weight:400;">(optional)</span></label>
-              <textarea id="message" name="message" class="form-control" placeholder="Tell us a bit about your trip plans, group size, dates — anything helps us get back to you faster."></textarea>
+              <label for="message">Your message <span
+                  style="color:var(--text-lighter); font-weight:400;">(optional)</span></label>
+              <textarea id="message" name="message" class="form-control"
+                placeholder="Tell us a bit about your trip plans, group size, dates — anything helps us get back to you faster."></textarea>
             </div>
             <button type="submit" id="submitBtn" class="btn btn-primary btn-full">Send message</button>
           </form>
@@ -229,17 +276,17 @@
   <script src="components/header.js"></script>
   <script src="components/footer.js"></script>
   <script>
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const errorDiv   = document.getElementById('formError');
+      const errorDiv = document.getElementById('formError');
       const successDiv = document.getElementById('formSuccess');
-      const btn        = document.getElementById('submitBtn');
+      const btn = document.getElementById('submitBtn');
 
       errorDiv.classList.remove('show');
       successDiv.classList.remove('show');
 
-      const name    = document.getElementById('name').value.trim();
-      const email   = document.getElementById('email').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value.trim();
       const message = document.getElementById('message').value.trim() || '(no message provided)';
 
@@ -254,7 +301,7 @@
       btn.textContent = 'Sending…';
 
       try {
-        const res  = await fetch('http://localhost:4000/api/contact', {
+        const res = await fetch('http://localhost:4000/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, subject, message })
@@ -279,7 +326,7 @@
     });
 
     // Pre-fill from URL params (e.g. from matches.html) and localStorage
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // URL params
       const params = new URLSearchParams(window.location.search);
       const subjectParam = params.get('subject');
@@ -289,16 +336,17 @@
 
       // Auto-fill from logged-in user
       try {
-        const raw  = localStorage.getItem('user');
+        const raw = localStorage.getItem('user');
         const user = raw ? JSON.parse(raw) : null;
         if (user) {
-          const nameField  = document.getElementById('name');
+          const nameField = document.getElementById('name');
           const emailField = document.getElementById('email');
-          if (nameField  && !nameField.value)  nameField.value  = user.fullName || user.full_name || '';
+          if (nameField && !nameField.value) nameField.value = user.fullName || user.full_name || '';
           if (emailField && !emailField.value) emailField.value = user.email || '';
         }
-      } catch(e) {}
+      } catch (e) { }
     });
   </script>
 </body>
+
 </html>

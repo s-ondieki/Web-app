@@ -12,6 +12,34 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// --- Web3Forms Notification Helper ---
+async function sendWeb3FormsNotification(subject, details) {
+  const accessKey = 'd21366ff-cd94-45e7-a9c4-351bb82cee81';
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        access_key: accessKey,
+        subject: subject,
+        from_name: 'Travel Safari System',
+        ...details
+      })
+    });
+    
+    if (!response.ok) {
+      const result = await response.json();
+      console.error('Web3Forms Error:', result);
+    }
+  } catch (err) {
+    console.error('Failed to send Web3Forms notification:', err);
+  }
+}
+
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
@@ -41,6 +69,13 @@ app.post('/api/register', (req, res) => {
           return res.status(500).json({ message: 'Server error.' });
         }
         res.status(201).json({ message: 'Registration successful.', user: newUser });
+        
+        // Notify admin about the new registration
+        sendWeb3FormsNotification('New User Registration - Travel Safari', {
+          user_name: fullName,
+          user_email: email,
+          message: `A new user has just created an account.\n\nName: ${fullName}\nEmail: ${email}`
+        });
       });
     } catch (e) {
       console.error('Hash error:', e);
@@ -131,6 +166,13 @@ app.post('/api/contact', (req, res) => {
       return res.status(500).json({ message: 'Failed to save message.' });
     }
     res.status(201).json({ message: 'Message received. We will get back to you soon!', contact: saved });
+
+    // Notify admin about the new contact message
+    sendWeb3FormsNotification(`New Contact Message: ${subject}`, {
+      sender_name: name,
+      sender_email: email,
+      message: `You have received a new message from the contact form.\n\nFrom: ${name} (${email})\nSubject: ${subject}\n\nMessage:\n${message}`
+    });
   });
 });
 

@@ -37,15 +37,16 @@
         text-decoration: none;
       }
       .ts-footer-lion {
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #c07030, #8a4819);
-        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.95rem;
         flex-shrink: 0;
+      }
+      .ts-footer-lion img {
+        width: 75px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: contain;
       }
       .ts-footer-name {
         font-size: 0.9rem;
@@ -120,7 +121,7 @@
 
             <div>
               <a href="home.html" class="ts-footer-brand-mark">
-                <span class="ts-footer-lion">🦁</span>
+                <span class="ts-footer-lion"><img src="assets/images/logo.png" alt="Travel Safari Logo"></span>
                 <span class="ts-footer-name">Travel Safari</span>
               </a>
               <p class="ts-footer-tagline">We help travellers plan meaningful African safari experiences — not just trips, but the kind of travel you remember.</p>
